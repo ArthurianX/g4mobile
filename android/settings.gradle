@@ -1,0 +1,3 @@
+rootProject.name = 'G4Mobile'
+
+include ':app'
