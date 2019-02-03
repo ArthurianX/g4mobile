@@ -5,7 +5,6 @@ import { PropTypes } from 'prop-types'
 import ExampleActions from 'App/Stores/Example/Actions'
 import { isHot } from 'App/Stores/Example/Selectors'
 import Style from './ExampleScreenStyle'
-
 /**
  * This is an example of a container component.
  *
@@ -31,7 +30,7 @@ class ExampleScreen extends React.Component {
 
     return (
       <View style={Style.container}>
-        <Text style={Style.title}>TheCodingMachine boilerplate</Text>
+        <Text style={Style.title}>TheXXCodingMachine boilerplate</Text>
         <Text style={Style.text}>To get started, edit App.js</Text>
         <Text style={Style.text}>{instructions}</Text>
         <Text style={Style.text}>The weather temperature is: {temperature}</Text>

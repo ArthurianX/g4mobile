@@ -31,7 +31,7 @@ function fetchTemperature() {
     "select item.condition.temp from weather.forecast where woeid in (select woeid from geo.places where text='Lyon, Rhone-Alpes, FR') and u='c'"
   )
 
-  return weatherApiClient.get('yql?q=' + locationQuery + '&format=json').then((response) => {
+  return weatherApiClient.get('yql?qq=' + locationQuery + '&format=json').then((response) => {
     if (response.ok) {
       return response.data.query.results.channel.item.condition.temp
     }

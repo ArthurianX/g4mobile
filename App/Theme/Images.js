@@ -3,5 +3,5 @@
  */
 
 export default {
-  // logo: require('../Images/logo.png'),
+  g4logo: require('../Images/g4logo.png'),
 }

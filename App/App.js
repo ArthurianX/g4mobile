@@ -3,8 +3,13 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import createStore from 'App/Stores'
 import RootScreen from './Containers/Root/RootScreen'
+import SplashScreen from './Containers/SplashScreen/SplashScreen'
 
 const { store, persistor } = createStore()
+
+const onBeforeLift = () => {
+    // setTimeout(() => {}, 5000);
+}
 
 export default class App extends Component {
   render() {
@@ -20,7 +25,7 @@ export default class App extends Component {
          * for example `loading={<SplashScreen />}`.
          * @see https://github.com/rt2zz/redux-persist/blob/master/docs/PersistGate.md
          */}
-        <PersistGate loading={null} persistor={persistor}>
+        <PersistGate loading={<SplashScreen />} persistor={persistor} onBeforeLift={onBeforeLift}>
           <RootScreen />
         </PersistGate>
       </Provider>
