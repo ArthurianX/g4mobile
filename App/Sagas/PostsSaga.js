@@ -1,7 +1,6 @@
 import { put, call } from 'redux-saga/effects'
 import PostsActions from 'App/Stores/Posts/Actions'
-import { G4MediaService } from "../Services/g4MediaService";
-
+import { G4MediaService } from 'App/Services/g4MediaService'
 
 /**
  * A saga can contain multiple functions.
