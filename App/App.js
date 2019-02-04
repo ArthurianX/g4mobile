@@ -4,11 +4,22 @@ import { PersistGate } from 'redux-persist/lib/integration/react'
 import createStore from 'App/Stores'
 import RootScreen from './Containers/Root/RootScreen'
 import SplashScreen from './Containers/SplashScreen/SplashScreen'
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 const { store, persistor } = createStore()
 
 const onBeforeLift = () => {
     // setTimeout(() => {}, 5000);
+}
+
+const theme = {
+  ...DefaultTheme,
+  roundness: 2,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'tomato',
+    accent: 'yellow',
+  },
 }
 
 export default class App extends Component {
@@ -25,9 +36,11 @@ export default class App extends Component {
          * for example `loading={<SplashScreen />}`.
          * @see https://github.com/rt2zz/redux-persist/blob/master/docs/PersistGate.md
          */}
-        <PersistGate loading={<SplashScreen />} persistor={persistor} onBeforeLift={onBeforeLift}>
-          <RootScreen />
-        </PersistGate>
+        <PaperProvider theme={theme}>
+          <PersistGate loading={<SplashScreen />} persistor={persistor} onBeforeLift={onBeforeLift}>
+            <RootScreen />
+          </PersistGate>
+        </PaperProvider>
       </Provider>
     )
   }

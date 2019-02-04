@@ -7,6 +7,7 @@ import ExampleScreen from 'App/Containers/Example/ExampleScreen'
 import SplashScreen from 'App/Containers/SplashScreen/SplashScreen'
 import { connect } from 'react-redux'
 import StartupActions from 'App/Stores/Startup/Actions'
+import { Text } from 'react-native-paper'
 
 /**
  * The root screen contains the application's navigation.
@@ -45,6 +46,8 @@ class RootScreen extends Component {
             NavigationService.setTopLevelNavigator(navigatorRef)
           }}
         />
+        <Text>BottomNav will come here.</Text>
+        {/* https://callstack.github.io/react-native-paper/bottom-navigation.html */}
       </View>
     )
   }
