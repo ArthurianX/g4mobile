@@ -3,7 +3,6 @@ import { Platform, Text, View, Button } from 'react-native'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import PostsActions from 'App/Stores/Posts/Actions'
-// import ExampleActions from 'App/Stores/Example/Actions'
 // import { isHot } from 'App/Stores/Example/Selectors'
 import Style from './ExampleScreenStyle'
 /**
