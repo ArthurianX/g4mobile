@@ -3,11 +3,11 @@ import { createStackNavigator } from 'react-navigation'
 import NavigationService from 'App/Services/NavigationService'
 import { View } from 'react-native'
 import styles from './RootScreenStyle'
-import ExampleScreen from 'App/Containers/Example/ExampleScreen'
 import SplashScreen from 'App/Containers/SplashScreen/SplashScreen'
 import { connect } from 'react-redux'
 import StartupActions from 'App/Stores/Startup/Actions'
-import { Text } from 'react-native-paper'
+import ExampleScreen from 'App/Containers/Example/ExampleScreen'
+import RootToMainScreen from './RootToMainScreen'
 
 /**
  * The root screen contains the application's navigation.
@@ -21,7 +21,8 @@ const AppNav = createStackNavigator(
     SplashScreen: SplashScreen,
     // The main application screen is our "ExampleScreen". Feel free to replace it with your
     // own screen and remove the example.
-    MainScreen: ExampleScreen,
+    MainScreen: RootToMainScreen,
+    // MainScreen: ExampleScreen,
   },
   {
     // By default the application will show the splash screen
@@ -46,8 +47,6 @@ class RootScreen extends Component {
             NavigationService.setTopLevelNavigator(navigatorRef)
           }}
         />
-        <Text>BottomNav will come here.</Text>
-        {/* https://callstack.github.io/react-native-paper/bottom-navigation.html */}
       </View>
     )
   }
