@@ -49,7 +49,7 @@ function processResponse(payload, type) {
   let result = []
 
   if (type === 'post') {
-    const pickAttrs = ['id', 'author', 'categories', 'content', 'date', 'excerpt', 'featured_media', 'title'];
+    const pickAttrs = ['id', 'author', 'categories', 'content', 'date', 'excerpt', 'jetpack_featured_media_url', 'title'];
     payload.map((ele) => result.push(pick(ele, pickAttrs)))
   }
 
@@ -59,6 +59,7 @@ function processResponse(payload, type) {
 function getAllPosts(params) {
   return g4MediaApiClient.get('posts' + searchQuery(params)).then((response) => {
     if (response.ok) {
+      console.info('g4MediaApiClient response', response.data)
       return processResponse(response.data, 'post')
     }
 

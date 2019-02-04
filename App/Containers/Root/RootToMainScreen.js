@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import ExampleScreen from 'App/Containers/Example/ExampleScreen'
+import PostsScreen from 'App/Containers/Posts/PostsScreen'
 import { BottomNavigation, Text, TouchableRipple } from 'react-native-paper';
 
 const AlbumsRoute = () => <Text>Albums</Text>;
@@ -27,7 +28,7 @@ export default class RootToMainScreen extends Component {
   }
 
   _renderScene = BottomNavigation.SceneMap({
-    main: ExampleScreen,
+    main: PostsScreen,
     filtered: AlbumsRoute,
     settings: RecentsRoute,
     feedback: RecentsRoute,
