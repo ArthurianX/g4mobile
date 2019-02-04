@@ -32,10 +32,34 @@ function searchQuery(params) {
   }
 }
 
+function processResponse(payload, type) {
+  function pick(raw, allowed) {
+    return Object.keys(raw)
+      .filter(key => allowed.includes(key))
+      .reduce((obj, key) => {
+        if (raw[key]['rendered']) {
+          obj[key] = raw[key]['rendered']
+        } else {
+          obj[key] = raw[key]
+        }
+
+        return obj
+      }, {})
+  }
+  let result = []
+
+  if (type === 'post') {
+    const pickAttrs = ['id', 'author', 'categories', 'content', 'date', 'excerpt', 'featured_media', 'title'];
+    payload.map((ele) => result.push(pick(ele, pickAttrs)))
+  }
+
+  return result
+}
+
 function getAllPosts(params) {
   return g4MediaApiClient.get('posts' + searchQuery(params)).then((response) => {
     if (response.ok) {
-      return response.data
+      return processResponse(response.data, 'post')
     }
 
     return null
@@ -46,7 +70,7 @@ function getAllPosts(params) {
 function getCategories() {
   return g4MediaApiClient.get('categories').then((response) => {
     if (response.ok) {
-      return response.data
+      return processResponse(response.data, 'category')
     }
 
     return null

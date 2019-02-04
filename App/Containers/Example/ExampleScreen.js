@@ -1,5 +1,5 @@
 import React from 'react'
-import { Platform, Text, View, Button } from 'react-native'
+import { Platform, Text, View, Button, FlatList, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import PostsActions from 'App/Stores/Posts/Actions'
@@ -23,33 +23,28 @@ class ExampleScreen extends React.Component {
   }
 
   render() {
-    let posts = this.props.postsIsLoading ? '...' : this.props.posts
+    let posts = this.props.postsIsLoading ? [] : this.props.posts
     if (posts === null) {
-      posts = '??'
+      posts = []
     }
 
-    function procPosts(obj) {
-      let res = ''
-      if (typeof obj === 'object') {
-        obj.map((ele) => {
-          res += ele.get('title').get('rendered')
-        })
-      } else {
-        res = obj
-      }
-
-      return res
+    function processPosts(items) {
+      let result = []
+      items.map((ele) => result.push(ele.get('title')))
+      return result
     }
 
     return (
       <View style={Style.container}>
-        <Text style={Style.title}>TheXXCodingMachine boilerplate</Text>
-        <Text style={Style.text}>To get started, edit App.js</Text>
-        <Text style={Style.text}>{instructions}</Text>
-        <Text style={Style.text}>The weather temperature is: {procPosts(posts)}</Text>
-        {/* <Text style={Style.text}>{this.props.isHot ? "It's pretty hot!" : ''}</Text> */}
-        <Text style={Style.text}>{this.props.postsErrorMessage}</Text>
-        <Button onPress={this.props.fetchPosts} title="Refresh" />
+        <ScrollView>
+          <Text style={Style.title}>TheXXCodingMachine boilerplate</Text>
+          <Text style={Style.text}>To get started, edit App.js</Text>
+          <Text style={Style.text}>{instructions}</Text>
+          <FlatList data={processPosts(posts)} renderItem={({item}) => <Text>{item}</Text>} />
+          {/* <Text style={Style.text}>{this.props.isHot ? "It's pretty hot!" : ''}</Text> */}
+          <Text style={Style.text}>{this.props.postsErrorMessage}</Text>
+          <Button onPress={this.props.fetchPosts} title="Refresh" />
+        </ScrollView>
       </View>
     )
   }

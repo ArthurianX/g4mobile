@@ -9,7 +9,7 @@ export const fetchPostsLoading = (state) =>
   })
 
 export const fetchPostsSuccess = (state, { posts }) => {
-  // TODO: Debug >
+  // TODO: Debug > console.log('fetchPostsSuccess', state, posts)
   console.log('fetchPostsSuccess', state, posts)
   return state.merge({
     posts: posts,
