@@ -5,6 +5,8 @@ import { PropTypes } from 'prop-types'
 import PostsActions from 'App/Stores/Posts/Actions'
 // import { isHot } from 'App/Stores/Example/Selectors'
 import Style from './ExampleScreenStyle'
+import Animations from 'App/Theme/Animations'
+import LottieView from 'lottie-react-native'
 /**
  * This is an example of a container component.
  *
@@ -24,9 +26,9 @@ class ExampleScreen extends React.Component {
 
   render() {
     let posts = this.props.postsIsLoading ? [] : this.props.posts
-    if (posts === null) {
-      posts = []
-    }
+    // if (posts === null) {
+    //   posts = []
+    // }
 
     function processPosts(items) {
       let result = []
@@ -40,6 +42,7 @@ class ExampleScreen extends React.Component {
           <Text style={Style.title}>TheXXCodingMachine boilerplate</Text>
           <Text style={Style.text}>To get started, edit App.js</Text>
           <Text style={Style.text}>{instructions}</Text>
+          <LottieView source={Animations.logo} autoPlay loop />
           <FlatList data={processPosts(posts)} renderItem={({item}) => <Text>{item}</Text>} />
           {/* <Text style={Style.text}>{this.props.isHot ? "It's pretty hot!" : ''}</Text> */}
           <Text style={Style.text}>{this.props.postsErrorMessage}</Text>
