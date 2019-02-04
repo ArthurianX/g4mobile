@@ -1,5 +1,5 @@
 import { put } from 'redux-saga/effects'
-import ExampleActions from 'App/Stores/Example/Actions'
+import PostsActions from 'App/Stores/Posts/Actions'
 import NavigationService from 'App/Services/NavigationService'
 
 /**
@@ -8,7 +8,9 @@ import NavigationService from 'App/Services/NavigationService'
 export function* startup() {
   // Dispatch a redux action using `put()`
   // @see https://redux-saga.js.org/docs/basics/DispatchingActions.html
-  yield put(ExampleActions.fetchTemperature())
+
+  // yield put(ExampleActions.fetchTemperature())
+  yield put(PostsActions.fetchPosts())
 
   // Add more operations you need to do at startup here
   // ...

@@ -1,5 +1,3 @@
-// posts?
-
 import { create } from 'apisauce'
 import { Config } from 'App/Config'
 
@@ -17,18 +15,25 @@ const g4MediaApiClient = create({
 
 // page=1&per_page=10&offset=10
 function searchQuery(params) {
-  let query = ''
+  if (!params) {
+    return ''
+  }
+  let query = '?'
   Object.entries(params).map((ele, idx) => {
     query += ele[0] ? ele[0] : ''
     query += ele[0] ? '=' : ''
     query += ele[1] ? ele[1] : ''
     query += idx - 1 <= Object.entries(params).length ? '&' : ''
   })
-  return escape(query)
+  if (query !== '?') {
+    return escape(query)
+  } else {
+    return ''
+  }
 }
 
 function getAllPosts(params) {
-  return g4MediaApiClient.get('posts?' + searchQuery(params)).then((response) => {
+  return g4MediaApiClient.get('posts' + searchQuery(params)).then((response) => {
     if (response.ok) {
       return response.data
     }

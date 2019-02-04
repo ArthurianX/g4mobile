@@ -8,12 +8,15 @@ export const fetchPostsLoading = (state) =>
     postsErrorMessage: '',
   })
 
-export const fetchPostsSuccess = (state, { posts }) =>
-  state.merge({
+export const fetchPostsSuccess = (state, { posts }) => {
+  // TODO: Debug >
+  console.log('fetchPostsSuccess', state, posts)
+  return state.merge({
     posts: posts,
     postsIsLoading: false,
     postsErrorMessage: null,
   })
+}
 
 export const fetchPostsFailure = (state, { errorMessage }) =>
   state.merge({
@@ -22,9 +25,6 @@ export const fetchPostsFailure = (state, { errorMessage }) =>
     postsErrorMessage: errorMessage,
   })
 
-/**
- * @see https://github.com/infinitered/reduxsauce#createreducer
- */
 export const reducer = createReducer(INITIAL_STATE, {
   [PostsTypes.FETCH_POSTS_LOADING]: fetchPostsLoading,
   [PostsTypes.FETCH_POSTS_SUCCESS]: fetchPostsSuccess,

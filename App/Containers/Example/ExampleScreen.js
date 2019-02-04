@@ -29,12 +29,25 @@ class ExampleScreen extends React.Component {
       posts = '??'
     }
 
+    function procPosts(obj) {
+      let res = ''
+      if (typeof obj === 'object') {
+        obj.map((ele) => {
+          res += ele.get('title').get('rendered')
+        })
+      } else {
+        res = obj
+      }
+
+      return res
+    }
+
     return (
       <View style={Style.container}>
         <Text style={Style.title}>TheXXCodingMachine boilerplate</Text>
         <Text style={Style.text}>To get started, edit App.js</Text>
         <Text style={Style.text}>{instructions}</Text>
-        <Text style={Style.text}>The weather temperature is: {posts}</Text>
+        <Text style={Style.text}>The weather temperature is: {procPosts(posts)}</Text>
         {/* <Text style={Style.text}>{this.props.isHot ? "It's pretty hot!" : ''}</Text> */}
         <Text style={Style.text}>{this.props.postsErrorMessage}</Text>
         <Button onPress={this.props.fetchPosts} title="Refresh" />
@@ -49,9 +62,9 @@ ExampleScreen.propsTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  posts: state.example.get('posts'),
-  postsErrorMessage: state.example.get('postsErrorMessage'),
-  postsIsLoading: state.example.get('postsIsLoading'),
+  posts: state.posts.get('posts'),
+  postsErrorMessage: state.posts.get('postsErrorMessage'),
+  postsIsLoading: state.posts.get('postsIsLoading'),
   // isHot: isHot(state),
 })
 
