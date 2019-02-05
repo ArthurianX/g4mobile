@@ -2,13 +2,13 @@ import { createActions } from 'reduxsauce'
 
 const { Types, Creators } = createActions({
   // Fetch the current weather temperature
-  fetchPosts: null,
+  fetchPosts: ['apiCallPageSize', 'apiCallPageOffset'],
   // The operation has started and is loading
   fetchPostsLoading: null,
   // The temperature was successfully fetched
   fetchPostsSuccess: ['posts'],
   // An error occurred
-  fetchPostsFailure: ['errorMessage'],
+  fetchPostsFailure: ['errorMessage']
 })
 
 export const PostsTypes = Types

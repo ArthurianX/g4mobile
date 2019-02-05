@@ -15,6 +15,7 @@ export const fetchPostsSuccess = (state, { posts }) => {
     posts: posts,
     postsIsLoading: false,
     postsErrorMessage: null,
+    apiCallPageOffset: state.get('apiCallPageOffset') + posts.length,
   })
 }
 

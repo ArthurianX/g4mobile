@@ -48,6 +48,10 @@ export default (rootReducer, rootSaga) => {
   const store = createStore(persistedReducer, compose(...enhancers))
   const persistor = persistStore(store)
 
+  // TODO: Uncomment this to purge Redux Store
+  // console.log('Persistor Purge!')
+  // persistor.purge()
+
   // Kick off the root saga
   sagaMiddleware.run(rootSaga)
 

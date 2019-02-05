@@ -33,18 +33,17 @@ class PostsScreen extends React.Component {
     // }
 
     function processPosts(items) {
+      console.log('processPosts', items)
       let result = []
-      items.map((ele) => result.push({id: ele.get('id'), title: ele.get('title'), image: ele.get('jetpack_featured_media_url')}))
+      if (items) {
+        items.map((ele) => result.push({id: ele.get('id'), title: ele.get('title'), image: ele.get('jetpack_featured_media_url')}))
+      }
       return result
     }
 
     return (
       <View style={Style.container}>
         <ScrollView>
-          {/*<Text style={Style.title}>TheXXCodingMachine boilerplate</Text>
-          <Text style={Style.text}>To get started, edit App.js</Text>
-          <Text style={Style.text}>{instructions}</Text>
-          <LottieView source={Animations.logo} autoPlay loop />*/}
           <Title style={Style.title}>Ultimele Articole</Title>
           <FlatList
             data={processPosts(posts)}
@@ -68,11 +67,17 @@ const mapStateToProps = (state) => ({
   posts: state.posts.get('posts'),
   postsErrorMessage: state.posts.get('postsErrorMessage'),
   postsIsLoading: state.posts.get('postsIsLoading'),
+  pageSize: state.posts.get('apiCallPageSize'),
+  pageOffset: state.posts.get('apiCallPageOffset'),
   // isHot: isHot(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchPosts: () => dispatch(PostsActions.fetchPosts()),
+  // fetchPosts: () => dispatch(PostsActions.fetchPosts()),
+  fetchPosts: () => {
+    // TODO: Get State
+    dispatch(PostsActions.fetchPosts(15, 0))
+  },
 })
 
 export default connect(

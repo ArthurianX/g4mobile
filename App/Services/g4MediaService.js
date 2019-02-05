@@ -22,11 +22,12 @@ function searchQuery(params) {
   Object.entries(params).map((ele, idx) => {
     query += ele[0] ? ele[0] : ''
     query += ele[0] ? '=' : ''
-    query += ele[1] ? ele[1] : ''
-    query += idx - 1 <= Object.entries(params).length ? '&' : ''
+    query += (ele[1] || ele[1] === 0) ? ele[1] : ''
+    query += idx - 1 >= Object.entries(params).length ? '&' : ''
   })
   if (query !== '?') {
-    return escape(query)
+    // return escape(query)
+    return query
   } else {
     return ''
   }
@@ -56,12 +57,15 @@ function processResponse(payload, type) {
   return result
 }
 
-function getAllPosts(params) {
-  return g4MediaApiClient.get('posts' + searchQuery(params)).then((response) => {
+function getAllPosts(undefined, params) {
+  console.log('API CALL to ', 'posts' + searchQuery(params))
+  // return g4MediaApiClient.get('posts' + searchQuery(params)).then((response) => {
+  return g4MediaApiClient.get('posts', params).then((response) => {
     if (response.ok) {
-      console.info('g4MediaApiClient response', response.data)
+      console.info('g4MediaApiClient response OK', response.data)
       return processResponse(response.data, 'post')
     }
+    console.info('g4MediaApiClient response FAIL', response)
 
     return null
   })
