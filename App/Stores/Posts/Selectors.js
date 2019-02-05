@@ -1,7 +1,7 @@
-export const PostsPageParamsSelector = (state) => {
+export const PostsApiParamsSelector = (state) => {
   const payload = {
-    pageSize: state.example.get('apiCallPageSize'),
-    pageOffset: state.example.get('apiCallPageOffset'),
+    per_page: state.posts.get('apiCallPageSize'),
+    offset: state.posts.get('apiCallPageOffset'),
   }
   return payload
 }

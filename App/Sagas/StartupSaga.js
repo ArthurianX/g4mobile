@@ -11,7 +11,6 @@ export function* startup() {
 
   // Trigger an existing Saga by calling an action
   yield put(PostsActions.fetchPosts())
-  // TODO: How to add pagination here ^ ?
 
   // Add more operations you need to do at startup here
   // ...
