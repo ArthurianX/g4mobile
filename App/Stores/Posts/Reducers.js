@@ -10,12 +10,13 @@ export const fetchPostsLoading = (state) =>
 
 export const fetchPostsSuccess = (state, { posts }) => {
   // TODO: Debug > console.log('fetchPostsSuccess', state, posts)
-  console.log('fetchPostsSuccess', state, posts)
+  console.log('fetchPostsSuccess & posts.length', posts.length, ' > Posts', state, posts)
   return state.merge({
     posts: posts,
     postsIsLoading: false,
     postsErrorMessage: null,
     apiCallPageOffset: state.get('apiCallPageOffset') + posts.length,
+    // TODO: Momentarily this breaks everything, every page load we get a new offset. FIX THIS
   })
 }
 

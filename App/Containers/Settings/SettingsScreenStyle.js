@@ -5,9 +5,11 @@ import ApplicationStyles from 'App/Theme/ApplicationStyles'
 export default StyleSheet.create({
   container: {
     ...ApplicationStyles.screen.container,
-    // margin: 12,
+    margin: 12,
     flex: 1,
-    justifyContent: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'stretch',
   },
   title: {
     //...Fonts.style.h2,
@@ -19,5 +21,21 @@ export default StyleSheet.create({
     ...Fonts.style.normal,
     textAlign: 'center',
     marginBottom: 5,
+  },
+  disabled: {
+    opacity: 0.5,
+  },
+  rowStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    marginBottom: 20
+  },
+  tableStyle: {
+    flex: 0.8,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'stretch',
   },
 })

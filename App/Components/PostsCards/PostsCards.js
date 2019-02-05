@@ -2,7 +2,6 @@ import React from 'react'
 import { Card, Paragraph } from 'react-native-paper'
 import PropTypes from 'prop-types'
 
-
 class PostsCards extends React.Component {
   render() {
     return (

@@ -1,11 +1,11 @@
 import React from 'react'
 import { Text, View, Button, FlatList, ScrollView } from 'react-native'
-import { Title } from 'react-native-paper'
+import { Title, Switch, DataTable } from 'react-native-paper'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
-import PostsActions from 'App/Stores/Posts/Actions'
+import SettingsActions from 'App/Stores/Settings/Actions'
 import PostsCards from 'App/Components/PostsCards/PostsCards'
-// import { isHot } from 'App/Stores/Example/Selectors'
+import { GetSettingsSelector } from 'App/Stores/Settings/Selectors'
 import Style from './SettingsScreenStyle'
 import Animations from 'App/Theme/Animations'
 import LottieView from 'lottie-react-native'
@@ -19,7 +19,45 @@ class SettingsScreen extends React.Component {
     return (
       <View style={Style.container}>
         <ScrollView>
-          <Text>Settings Page</Text>
+          <Title style={Style.title}>Schimbare Setari</Title>
+          {/*<Text>{ this.props.settings }</Text>*/}
+
+          <DataTable style={Style.tableStyle}>
+            <DataTable.Row style={Style.rowStyle}>
+              <DataTable.Cell>Schimba Tema</DataTable.Cell>
+              <DataTable.Cell style={{ flex: 0.2 }}>
+                <Switch value={this.props.settings.get('theme') ? true : false} onValueChange={ this.props.changeTheme }/>
+              </DataTable.Cell>
+            </DataTable.Row>
+
+            <DataTable.Row style={Style.rowStyle}>
+              <DataTable.Cell>Arata Categoria Articolului</DataTable.Cell>
+              <DataTable.Cell style={{ flex: 0.2 }}>
+                <Switch value={this.props.settings.get('show_categories') ? true : false} onValueChange={ this.props.changeCategoryVisibility }/>
+              </DataTable.Cell>
+            </DataTable.Row>
+
+            <DataTable.Row style={Style.rowStyle}>
+              <DataTable.Cell>Arata Data Articolului</DataTable.Cell>
+              <DataTable.Cell style={{ flex: 0.2 }}>
+                <Switch value={this.props.settings.get('show_dates') ? true : false} onValueChange={ this.props.changeDateVisibility }/>
+              </DataTable.Cell>
+            </DataTable.Row>
+
+            <DataTable.Row style={Style.rowStyle}>
+              <DataTable.Cell>Arata Autorul Articolului</DataTable.Cell>
+              <DataTable.Cell style={{ flex: 0.2 }}>
+                <Switch value={this.props.settings.get('show_author') ? true : false} onValueChange={ this.props.changeAuthorVisibility }/>
+              </DataTable.Cell>
+            </DataTable.Row>
+
+            <DataTable.Row style={Style.rowStyle}>
+              <DataTable.Cell style={Style.disabled}>Notificari Articole Noi</DataTable.Cell>
+              <DataTable.Cell style={{ flex: 0.2 }}>
+                <Switch disabled value={this.props.settings.get('notifications') ? true : false} onValueChange={ this.props.changeNotificationStatus }/>
+              </DataTable.Cell>
+            </DataTable.Row>
+          </DataTable>
         </ScrollView>
       </View>
     )
@@ -27,22 +65,20 @@ class SettingsScreen extends React.Component {
 }
 
 SettingsScreen.propsTypes = {
-  posts: PropTypes.array,
-  postsErrorMessage: PropTypes.string,
+  settings: PropTypes.object,
 }
 
 const mapStateToProps = (state) => ({
-  // posts: state.posts.get('posts'),
-  // postsErrorMessage: state.posts.get('postsErrorMessage'),
-  // postsIsLoading: state.posts.get('postsIsLoading'),
-  // pageSize: state.posts.get('apiCallPageSize'),
-  // pageOffset: state.posts.get('apiCallPageOffset'),
+  settings: GetSettingsSelector(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  // fetchPosts: () => {
-  //   dispatch(PostsActions.fetchPosts(15, 0))
-  // },
+  changeTheme: () => dispatch(SettingsActions.changeTheme()),
+  changeCategoryVisibility: () => dispatch(SettingsActions.changeCategoryVisibility()),
+  changeDateVisibility: () => dispatch(SettingsActions.changeDateVisibility()),
+  changeAuthorVisibility: () => dispatch(SettingsActions.changeAuthorVisibility()),
+  changeNotificationStatus: () => dispatch(SettingsActions.changeNotificationStatus()),
+  globalReset: () => dispatch(SettingsActions.globalReset()),
 })
 
 export default connect(
