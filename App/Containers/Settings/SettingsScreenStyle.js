@@ -38,4 +38,26 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'stretch',
   },
+  themeContainer: {
+    marginLeft: -12,
+    marginRight: -12,
+    height: 100,
+  },
+  themeContainerLottie: {
+    width: '100%',
+    transform: [
+      { scaleX: 0.6 },
+      { scaleY: 0.6 },
+    ],
+    height: 300,
+    marginLeft: 0,
+    zIndex: 1000,
+  },
+  belowLottie: {
+    textAlign: 'center',
+    marginTop: -100,
+    marginBottom: 50,
+    fontSize: 18,
+    zIndex: 100,
+  }
 })

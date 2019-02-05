@@ -7,6 +7,8 @@ import SplashScreen from 'App/Containers/SplashScreen/SplashScreen'
 import { connect } from 'react-redux'
 import StartupActions from 'App/Stores/Startup/Actions'
 import RootToMainScreen from './RootToMainScreen'
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
+import { GetSettingsSelector } from 'App/Stores/Settings/Selectors'
 
 /**
  * The root screen contains the application's navigation.
@@ -28,6 +30,33 @@ const AppNav = createStackNavigator(
   }
 )
 
+const lightTheme = {
+  ...DefaultTheme,
+  roundness: 2,
+  dark: false,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#eceff1',
+    accent: '#1a237e',
+    background: '#ddddde',
+    surface: '#f1f1f1',
+  },
+}
+
+const darkTheme = {
+  ...DefaultTheme,
+  roundness: 2,
+  dark: true,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#1b1b1b',
+    accent: '#3f51b5',
+    background: '#424242',
+    surface: '#6d6d6d',
+    text: '#f9f9f9',
+  },
+}
+
 class RootScreen extends Component {
   componentDidMount() {
     // Run the startup saga when the application is starting
@@ -35,20 +64,25 @@ class RootScreen extends Component {
   }
 
   render() {
+    const selectedTheme = this.props.settings.get('theme') ? darkTheme : lightTheme
     return (
-      <View style={styles.container}>
-        <AppNav
-          // Initialize the NavigationService (see https://reactnavigation.org/docs/en/navigating-without-navigation-prop.html)
-          ref={(navigatorRef) => {
-            NavigationService.setTopLevelNavigator(navigatorRef)
-          }}
-        />
-      </View>
+      <PaperProvider theme={selectedTheme}>
+        <View style={styles.container}>
+          <AppNav
+            // Initialize the NavigationService (see https://reactnavigation.org/docs/en/navigating-without-navigation-prop.html)
+            ref={(navigatorRef) => {
+              NavigationService.setTopLevelNavigator(navigatorRef)
+            }}
+          />
+        </View>
+      </PaperProvider>
     )
   }
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  settings: GetSettingsSelector(state),
+})
 
 const mapDispatchToProps = (dispatch) => ({
   startup: () => dispatch(StartupActions.startup()),

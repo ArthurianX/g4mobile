@@ -1,6 +1,6 @@
 import React from 'react'
-import { Text, View, Button, FlatList, ScrollView } from 'react-native'
-import { Title, Switch, DataTable } from 'react-native-paper'
+import { View, ScrollView, TouchableHighlight, Animated, Easing } from 'react-native'
+import { Title, Switch, DataTable, Paragraph } from 'react-native-paper'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import SettingsActions from 'App/Stores/Settings/Actions'
@@ -10,25 +10,71 @@ import Style from './SettingsScreenStyle'
 import Animations from 'App/Theme/Animations'
 import LottieView from 'lottie-react-native'
 
+let animationProgress = new Animated.Value(0)
+
+const changeThemeCbck = (cbck, timer) => {
+  setTimeout(() => cbck(), timer)
+}
+
 class SettingsScreen extends React.Component {
   componentDidMount() {
     // this.props.fetchPosts()
+    Animated.timing(animationProgress, {
+      toValue: !!this.props.settings.get('theme') / 2,
+      duration: 1000,
+      easing: Easing.linear,
+    }).start()
   }
-
   render() {
+    function switchTheme() {
+      console.log('switchTheme funct', this)
+      if (!!this.props.settings.get('theme')) {
+        animationProgress = new Animated.Value(0.5)
+        Animated.timing(animationProgress, {
+          toValue: 0,
+          duration: 1500,
+          easing: Easing.linear,
+        }).start()
+        changeThemeCbck(this.props.changeTheme, 750)
+      } else {
+        animationProgress = new Animated.Value(0)
+        Animated.timing(animationProgress, {
+          toValue: 0.5,
+          duration: 2500,
+          easing: Easing.linear,
+        }).start()
+        changeThemeCbck(this.props.changeTheme, 350)
+      }
+      // setTimeout(() => this.props.changeTheme(), 750)
+
+    }
     return (
       <View style={Style.container}>
         <ScrollView>
           <Title style={Style.title}>Schimbare Setari</Title>
-          {/*<Text>{ this.props.settings }</Text>*/}
+
+          <TouchableHighlight
+            onPress={switchTheme.bind(this)}
+            activeOpacity={1}
+            underlayColor={'rgba(255, 255, 255, 0)'}
+            style={Style.themeContainerLottie}>
+            <LottieView
+              progress={animationProgress}
+              resizeMode={'center'}
+              source={Animations.themeSwitcher}
+
+            />
+          </TouchableHighlight>
+          <Paragraph onPress={() => switchTheme.bind(this)} style={Style.belowLottie}>Schimbare Tema</Paragraph>
 
           <DataTable style={Style.tableStyle}>
-            <DataTable.Row style={Style.rowStyle}>
+
+            {/* <DataTable.Row style={Style.rowStyle}>
               <DataTable.Cell>Schimba Tema</DataTable.Cell>
               <DataTable.Cell style={{ flex: 0.2 }}>
                 <Switch value={this.props.settings.get('theme') ? true : false} onValueChange={ this.props.changeTheme }/>
               </DataTable.Cell>
-            </DataTable.Row>
+            </DataTable.Row> */}
 
             <DataTable.Row style={Style.rowStyle}>
               <DataTable.Cell>Arata Categoria Articolului</DataTable.Cell>
