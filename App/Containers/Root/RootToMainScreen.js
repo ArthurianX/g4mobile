@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import ExampleScreen from 'App/Containers/Example/ExampleScreen'
 import PostsScreen from 'App/Containers/Posts/PostsScreen'
-import { BottomNavigation, Text, TouchableRipple } from 'react-native-paper';
-
-const AlbumsRoute = () => <Text>Albums</Text>;
-const RecentsRoute = () => <Text>Recents</Text>;
+import FilteredPostsScreen from 'App/Containers/FilteredPosts/FilteredPostsScreen'
+import FeedbackScreen from 'App/Containers/Feedback/FeedbackScreen'
+import SettingsScreen from 'App/Containers/Settings/SettingsScreen'
+import { BottomNavigation, Text } from 'react-native-paper';
 
 export default class RootToMainScreen extends Component {
   state = {
@@ -29,9 +28,9 @@ export default class RootToMainScreen extends Component {
 
   _renderScene = BottomNavigation.SceneMap({
     main: PostsScreen,
-    filtered: AlbumsRoute,
-    settings: RecentsRoute,
-    feedback: RecentsRoute,
+    filtered: FilteredPostsScreen,
+    settings: SettingsScreen,
+    feedback: FeedbackScreen,
   });
 
   render() {

@@ -5,10 +5,10 @@ import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import PostsActions from 'App/Stores/Posts/Actions'
 import PostsCards from 'App/Components/PostsCards/PostsCards'
-// import { isHot } from 'App/Stores/Example/Selectors'
 import Style from './PostsScreenStyle'
 import Animations from 'App/Theme/Animations'
 import LottieView from 'lottie-react-native'
+import { PostsPageParamsSelector } from 'App/Stores/Posts/Selectors'
 
 class PostsScreen extends React.Component {
   componentDidMount() {
@@ -58,7 +58,7 @@ const mapStateToProps = (state) => ({
   postsIsLoading: state.posts.get('postsIsLoading'),
   pageSize: state.posts.get('apiCallPageSize'),
   pageOffset: state.posts.get('apiCallPageOffset'),
-  // isHot: isHot(state),
+  // PostsPageParamsSelector: PostsPageParamsSelector(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
