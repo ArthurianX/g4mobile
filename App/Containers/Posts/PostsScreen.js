@@ -9,17 +9,6 @@ import PostsCards from 'App/Components/PostsCards/PostsCards'
 import Style from './PostsScreenStyle'
 import Animations from 'App/Theme/Animations'
 import LottieView from 'lottie-react-native'
-/**
- * This is an example of a container component.
- *
- * This screen displays a little help message and shows the weather temperature.
- * Feel free to remove it.
- */
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\nCmd+D or shake for dev menuuuuuuu.',
-  android: 'Double tap R on your keyboard to reload,\nShake or press menu button for dev menu.',
-})
 
 class PostsScreen extends React.Component {
   componentDidMount() {
