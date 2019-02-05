@@ -1,15 +1,16 @@
 import React from 'react'
-import { Title, Card } from 'react-native'
+import { Card, Paragraph } from 'react-native-paper'
 import PropTypes from 'prop-types'
+
 
 class PostsCards extends React.Component {
   render() {
     return (
-      <Card>
+      <Card elevation={5} style={{ marginBottom: 12, marginLeft: 12, marginRight: 12 }}>
+        <Card.Cover source={{ uri: this.props.post.image }} />
         <Card.Content>
-          <Title>{this.post.title}</Title>
+          <Paragraph>{this.props.post.title}</Paragraph>
         </Card.Content>
-        <Card.Cover source={{ uri: this.post.jetpack_featured_media_url }} />
       </Card>
     )
   }

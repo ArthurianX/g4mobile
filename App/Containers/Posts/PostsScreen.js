@@ -1,5 +1,6 @@
 import React from 'react'
-import { Platform, Text, View, Button, FlatList, ScrollView, Card, Title } from 'react-native'
+import { Platform, Text, View, Button, FlatList, ScrollView } from 'react-native'
+import { Title } from 'react-native-paper'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import PostsActions from 'App/Stores/Posts/Actions'
@@ -33,24 +34,25 @@ class PostsScreen extends React.Component {
 
     function processPosts(items) {
       let result = []
-      items.map((ele) => result.push(ele.get('title')))
+      items.map((ele) => result.push({id: ele.get('id'), title: ele.get('title'), image: ele.get('jetpack_featured_media_url')}))
       return result
     }
 
     return (
       <View style={Style.container}>
         <ScrollView>
-          <Text style={Style.title}>TheXXCodingMachine boilerplate</Text>
+          {/*<Text style={Style.title}>TheXXCodingMachine boilerplate</Text>
           <Text style={Style.text}>To get started, edit App.js</Text>
           <Text style={Style.text}>{instructions}</Text>
-          <LottieView source={Animations.logo} autoPlay loop />
+          <LottieView source={Animations.logo} autoPlay loop />*/}
+          <Title style={Style.title}>Ultimele Articole</Title>
           <FlatList
             data={processPosts(posts)}
             renderItem={({ item }) => <PostsCards post={item} />}
           />
           {/* <Text style={Style.text}>{this.props.isHot ? "It's pretty hot!" : ''}</Text> */}
           <Text style={Style.text}>{this.props.postsErrorMessage}</Text>
-          <Button onPress={this.props.fetchPosts} title="Refresh" />
+          <Button onPress={this.props.fetchPosts} title="Mai multe" />
         </ScrollView>
       </View>
     )
