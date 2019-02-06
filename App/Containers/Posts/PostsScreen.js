@@ -7,12 +7,9 @@ import PostsActions from 'App/Stores/Posts/Actions'
 import PostsCards from 'App/Components/PostsCards/PostsCards'
 import LoadingActivity from 'App/Components/LoadingActivity/LoadingActivity'
 import Style from './PostsScreenStyle'
-import { withNavigationFocus } from 'react-navigation'
 
 class PostsScreen extends React.Component {
   componentDidMount() {
-    // They are already fetched on the Startup Cmpnt
-    // this.props.fetchPosts()
     this.props.fetchMorePosts()
   }
 
@@ -74,17 +71,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchPosts: () => dispatch(PostsActions.fetchPosts()),
-  fetchMorePosts: (distance) => {
-    dispatch(PostsActions.fetchMorePosts())
-    // console.log('fetchMorePosts', distance)
-    // if (distance < 100) {
-    //   console.log('Distance reached, FETCH', distance)
-    //   dispatch(PostsActions.fetchMorePosts())
-    // }
-  },
+  fetchMorePosts: () => dispatch(PostsActions.fetchMorePosts()),
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withNavigationFocus(PostsScreen))
+)(PostsScreen)

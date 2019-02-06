@@ -6,6 +6,7 @@ import RootScreen from './Containers/Root/RootScreen'
 import SplashScreen from './Containers/SplashScreen/SplashScreen'
 
 const { store, persistor } = createStore()
+console.log('STORE', store, persistor)
 
 const onBeforeLift = () => {
     // setTimeout(() => {}, 5000);
@@ -25,8 +26,8 @@ export default class App extends Component {
          * for example `loading={<SplashScreen />}`.
          * @see https://github.com/rt2zz/redux-persist/blob/master/docs/PersistGate.md
          */}
-
-        <PersistGate loading={<SplashScreen />} persistor={persistor} onBeforeLift={onBeforeLift}>
+        {/* <SplashScreen /> TODO: Putting Splashscreen here too, will make it render twice. */}
+        <PersistGate loading={null} persistor={persistor} onBeforeLift={onBeforeLift}>
           <RootScreen />
         </PersistGate>
       </Provider>

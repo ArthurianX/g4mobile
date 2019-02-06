@@ -57,10 +57,7 @@ export default (rootReducer, rootSaga) => {
 
   const store = createStore(
     persistedReducer,
-    compose(
-      ...enhancers,
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // TODO: Remove Redux DevTools on prod
-    )
+    compose(...enhancers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
     )
   const persistor = persistStore(store)
 
