@@ -8,7 +8,7 @@ import { BottomNavigation, Text } from 'react-native-paper';
 
 export default class RootToMainScreen extends Component {
   state = {
-    index: 3, // TODO: This changes the main page.
+    index: 0, // TODO: This changes the main page.
     routes: [
       { key: 'main', title: 'Articole', icon: 'list' },
       { key: 'filtered', title: 'Filtrele Mele', icon: 'bookmark' },

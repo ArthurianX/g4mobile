@@ -33,15 +33,21 @@ function searchQuery(params) {
   }
 }
 
-function getAllPosts() {
-
+function mergePosts(present, incoming) {
+  console.log('Merge Posts', present, incoming)
+  /*
+   * mergePosts logic:
+   * - Do not let in duplicates
+   * - Arrange by date
+   * - Always maximum of 100 posts
+   * - New ones need to be attached on top, then refiltered <= 100
+   * - TODO: Still need to think about this.
+    * */
 }
 
-function getCategories() {
+function mergeAndFilter() {}
 
-}
-
-export const SavedPostsMiddleware = {
-  getAllPosts,
-  getCategories,
+export const PostsMiddleware = {
+  mergePosts,
+  mergeAndFilter,
 }

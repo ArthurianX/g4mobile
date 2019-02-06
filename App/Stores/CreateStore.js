@@ -1,6 +1,7 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { persistReducer, persistStore } from 'redux-persist'
+import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 import immutableTransform from 'redux-persist-transform-immutable'
 
 /**
@@ -30,6 +31,7 @@ const persistConfig = {
   blacklist: [
     // 'auth',
   ],
+  stateReconciler: hardSet,
 }
 
 export default (rootReducer, rootSaga) => {
@@ -45,7 +47,13 @@ export default (rootReducer, rootSaga) => {
   // Redux persist
   const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-  const store = createStore(persistedReducer, compose(...enhancers))
+  const store = createStore(
+    persistedReducer,
+    compose(
+      ...enhancers,
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // TODO: Remove Redux DevTools
+    )
+    )
   const persistor = persistStore(store)
 
   // TODO: Uncomment this to purge Redux Store

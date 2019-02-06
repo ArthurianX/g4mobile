@@ -1,6 +1,7 @@
 import { INITIAL_STATE } from './InitialState'
 import { createReducer } from 'reduxsauce'
 import { PostsTypes } from './Actions'
+import { PostsMiddleware } from 'App/Services/PostsMiddlewareService'
 
 export const fetchPostsLoading = (state) =>
   state.merge({
@@ -8,17 +9,14 @@ export const fetchPostsLoading = (state) =>
     postsErrorMessage: '',
   })
 
-export const fetchPostsSuccess = (state, { posts }) => {
-  // TODO: Debug > console.log('fetchPostsSuccess', state, posts)
-  console.log('fetchPostsSuccess & posts.length', posts.length, ' > Posts', state, posts)
-  return state.merge({
-    posts: posts,
+export const fetchPostsSuccess = (state, { posts }) =>
+  state.merge({
+    posts: PostsMiddleware.mergePosts(state.get('posts'), posts),
     postsIsLoading: false,
     postsErrorMessage: null,
     apiCallPageOffset: state.get('apiCallPageOffset') + posts.length,
     // TODO: Momentarily this breaks everything, every page load we get a new offset. FIX THIS
   })
-}
 
 export const fetchPostsFailure = (state, { errorMessage }) =>
   state.merge({

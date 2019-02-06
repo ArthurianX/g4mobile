@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
-import {connect, Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import createStore from 'App/Stores'
 import RootScreen from './Containers/Root/RootScreen'
 import SplashScreen from './Containers/SplashScreen/SplashScreen'
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
-import {PropTypes} from 'prop-types';
-import {GetSettingsSelector} from './Stores/Settings/Selectors';
-import SettingsActions from './Stores/Settings/Actions';
 
 const { store, persistor } = createStore()
 

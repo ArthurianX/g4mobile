@@ -1,14 +1,11 @@
 import React from 'react'
-import { Platform, Text, View, Button, FlatList, ScrollView } from 'react-native'
+import { Text, View, Button, FlatList, ScrollView } from 'react-native'
 import { Title } from 'react-native-paper'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import PostsActions from 'App/Stores/Posts/Actions'
 import PostsCards from 'App/Components/PostsCards/PostsCards'
 import Style from './PostsScreenStyle'
-import Animations from 'App/Theme/Animations'
-import LottieView from 'lottie-react-native'
-import { PostsPageParamsSelector } from 'App/Stores/Posts/Selectors'
 
 class PostsScreen extends React.Component {
   componentDidMount() {
@@ -17,15 +14,16 @@ class PostsScreen extends React.Component {
 
   render() {
     let posts = this.props.postsIsLoading ? [] : this.props.posts
-    // if (posts === null) {
-    //   posts = []
-    // }
 
     function processPosts(items) {
-      console.log('processPosts', items)
       let result = []
       if (items) {
-        items.map((ele) => result.push({id: ele.get('id'), title: ele.get('title'), image: ele.get('jetpack_featured_media_url')}))
+        let numberOfPosts = 0
+        items.map((ele) => {
+          numberOfPosts += 1
+          result.push({id: ele.get('id'), title: ele.get('title'), image: ele.get('jetpack_featured_media_url')})
+        })
+        console.log('PostsScreen => Processing Posts #', numberOfPosts)
       }
       return result
     }
@@ -33,9 +31,14 @@ class PostsScreen extends React.Component {
     return (
       <View style={Style.container}>
         <ScrollView>
+          {/* TODO: Removing ^ this will leave the title fixed at the top */}
+
           <Title style={Style.title}>Ultimele Articole</Title>
+
+          {/*{this.props.postsIsLoading ? <Component /> : <OtherComponent />}*/}
+
           <FlatList
-            data={processPosts(posts)}
+            data={processPosts(this.props.posts)}
             renderItem={({ item }) => <PostsCards post={item} />}
           />
           {/* <Text style={Style.text}>{this.props.isHot ? "It's pretty hot!" : ''}</Text> */}
@@ -58,15 +61,10 @@ const mapStateToProps = (state) => ({
   postsIsLoading: state.posts.get('postsIsLoading'),
   pageSize: state.posts.get('apiCallPageSize'),
   pageOffset: state.posts.get('apiCallPageOffset'),
-  // PostsPageParamsSelector: PostsPageParamsSelector(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  // fetchPosts: () => dispatch(PostsActions.fetchPosts()),
-  fetchPosts: () => {
-    // TODO: Get State
-    dispatch(PostsActions.fetchPosts(15, 0))
-  },
+  fetchPosts: () => dispatch(PostsActions.fetchPosts()),
 })
 
 export default connect(

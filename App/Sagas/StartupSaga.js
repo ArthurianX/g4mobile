@@ -9,7 +9,6 @@ export function* startup() {
   // Dispatch a redux action using `put()`
   // @see https://redux-saga.js.org/docs/basics/DispatchingActions.html
 
-  // Trigger an existing Saga by calling an action
   yield put(PostsActions.fetchPosts())
 
   // Add more operations you need to do at startup here
