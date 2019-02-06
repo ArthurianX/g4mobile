@@ -1,8 +1,9 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import { persistReducer, persistStore } from 'redux-persist'
+import { persistReducer, persistStore, createTransform } from 'redux-persist'
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 import immutableTransform from 'redux-persist-transform-immutable'
+import omit from 'lodash-es/omit'
 
 /**
  * This import defaults to localStorage for web and AsyncStorage for react-native.
@@ -15,6 +16,8 @@ import immutableTransform from 'redux-persist-transform-immutable'
  */
 import storage from 'redux-persist/lib/storage'
 
+const blacklistPaths = ['posts.apiCallPageOffset']
+
 const persistConfig = {
   transforms: [
     /**
@@ -22,15 +25,19 @@ const persistConfig = {
      * @see https://github.com/rt2zz/redux-persist-transform-immutable
      */
     immutableTransform(),
+    createTransform((inboundState, key) => {
+      // Blacklist specific props and nested props based on blacklistPaths above
+      if (blacklistPaths.indexOf(key) != -1) return undefined
+      const blacklistPathsForKey = blacklistPaths
+        .filter((path) => path.startsWith(`${key}.`))
+        .map((path) => path.substr(key.length + 1))
+      return blacklistPathsForKey.length
+        ? omit(inboundState, ...blacklistPathsForKey)
+        : inboundState
+    }, null),
   ],
   key: 'root',
   storage: storage,
-  /**
-   * Blacklist state that we do not need/want to persist
-   */
-  blacklist: [
-    // 'auth',
-  ],
   stateReconciler: hardSet,
 }
 

@@ -1,53 +1,50 @@
-import { create } from 'apisauce'
-import { Config } from 'App/Config'
+import sortedUniqBy from 'lodash-es/sortedUniqBy'
 
-const g4MediaApiClient = create({
-  /**
-   * Import the config from the App/Config/index.js file
-   */
-  baseURL: Config.API_URL,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
-  timeout: 3000,
-})
+function convertPresent(arr) {
+  const interim = arr.toArray()
+  return interim.map((ele) => ele.toObject())
+}
 
-// page=1&per_page=10&offset=10
-function searchQuery(params) {
-  if (!params) {
-    return ''
-  }
-  let query = '?'
-  Object.entries(params).map((ele, idx) => {
-    query += ele[0] ? ele[0] : ''
-    query += ele[0] ? '=' : ''
-    query += (ele[1] || ele[1] === 0) ? ele[1] : ''
-    query += idx - 1 >= Object.entries(params).length ? '&' : ''
-  })
-  if (query !== '?') {
-    // return escape(query)
-    return query
-  } else {
-    return ''
-  }
+function removeDuplicates(arr) {
+  return sortedUniqBy(arr, (ele) => ele.id)
+}
+
+function limitNumber(arr, nr) {
+  return arr.slice(0, nr)
 }
 
 function mergePosts(present, incoming) {
-  console.log('Merge Posts', present, incoming)
-  /*
-   * mergePosts logic:
-   * - Do not let in duplicates
-   * - Arrange by date
-   * - Always maximum of 100 posts
-   * - New ones need to be attached on top, then refiltered <= 100
-   * - TODO: Still need to think about this.
-    * */
+  const actual = present && present.length
+    ? convertPresent(present)
+    : []
+
+  let collection = incoming && incoming.length
+    ? removeDuplicates(actual.concat(incoming))
+    : removeDuplicates(actual)
+
+  return collection.length > 500
+    ? limitNumber(collection.reverse(), 500)
+    : collection.reverse()
+}
+
+function mergePostsWithStartupTrim(present, incoming) {
+  const actual = present && present.length
+    ? convertPresent(present)
+    : []
+
+  let collection = incoming && incoming.length
+    ? removeDuplicates(actual.concat(incoming))
+    : removeDuplicates(actual)
+
+  return collection.length > 30
+    ? limitNumber(collection.reverse(), 30)
+    : collection.reverse()
 }
 
 function mergeAndFilter() {}
 
 export const PostsMiddleware = {
   mergePosts,
+  mergePostsWithStartupTrim,
   mergeAndFilter,
 }

@@ -14,6 +14,7 @@
   "dependencies": {
     "apisauce": "^0.15.2",
     "immutable": "^3.8.2",
+    "lodash-es": "^4.17.11",
     "lottie-react-native": "^2.5.11",
     "prop-types": "^15.6.1",
     "react": "16.6.3",

@@ -5,3 +5,7 @@ export const PostsApiParamsSelector = (state) => {
   }
   return payload
 }
+
+export const PostsSavedSelector = (state) => {
+  return state.posts.get('posts')
+}

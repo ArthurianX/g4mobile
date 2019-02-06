@@ -9,7 +9,9 @@ import Style from './PostsScreenStyle'
 
 class PostsScreen extends React.Component {
   componentDidMount() {
-    this.props.fetchPosts()
+    // They are already fetched on the Startup Cmpnt
+    // this.props.fetchPosts()
+    this.props.fetchMorePosts()
   }
 
   render() {
@@ -43,7 +45,7 @@ class PostsScreen extends React.Component {
           />
           {/* <Text style={Style.text}>{this.props.isHot ? "It's pretty hot!" : ''}</Text> */}
           <Text style={Style.text}>{this.props.postsErrorMessage}</Text>
-          <Button onPress={this.props.fetchPosts} title="Mai multe" />
+          <Button onPress={this.props.fetchMorePosts} title="Mai multe" />
         </ScrollView>
       </View>
     )
@@ -65,6 +67,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchPosts: () => dispatch(PostsActions.fetchPosts()),
+  fetchMorePosts: () => dispatch(PostsActions.fetchMorePosts()),
 })
 
 export default connect(
