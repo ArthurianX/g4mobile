@@ -27,6 +27,7 @@ const AppNav = createStackNavigator(
     initialRouteName: 'SplashScreen',
     // See https://reactnavigation.org/docs/en/stack-navigator.html#stacknavigatorconfig
     headerMode: 'none',
+    mode: 'card',
   }
 )
 
@@ -37,7 +38,7 @@ const lightTheme = {
   colors: {
     ...DefaultTheme.colors,
     primary: '#eceff1',
-    accent: '#1a237e',
+    accent: '#5fc1ff',
     background: '#ddddde',
     surface: '#f1f1f1',
   },
@@ -50,7 +51,7 @@ const darkTheme = {
   colors: {
     ...DefaultTheme.colors,
     primary: '#1b1b1b',
-    accent: '#3f51b5',
+    accent: '#111439',
     background: '#424242',
     surface: '#6d6d6d',
     text: '#f9f9f9',

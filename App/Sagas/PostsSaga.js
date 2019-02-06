@@ -34,10 +34,12 @@ export function* fetchMorePosts() {
   const newPosts = yield call(G4MediaService.getAllPosts, undefined, payload)
   const posts = PostsMiddleware.mergePosts(existingPosts, newPosts)
 
+
   if (posts) {
     yield put(PostsActions.fetchMorePostsSuccess(posts))
   } else {
     yield put(
+      // TODO: Have to send a notification here when we don't get new posts and send the old ones
       PostsActions.fetchPostsFailure('There was an error while fetching the latest posts.')
     )
   }

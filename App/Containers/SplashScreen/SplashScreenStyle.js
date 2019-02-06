@@ -8,7 +8,6 @@ export default StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.primary,
   },
   logo: {
     display: 'flex',

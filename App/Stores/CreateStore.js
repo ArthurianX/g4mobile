@@ -1,6 +1,6 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import { persistReducer, persistStore, createTransform } from 'redux-persist'
+import { persistReducer, persistCombineReducers, persistStore, createTransform } from 'redux-persist'
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 import immutableTransform from 'redux-persist-transform-immutable'
 import omit from 'lodash-es/omit'
@@ -53,12 +53,13 @@ export default (rootReducer, rootSaga) => {
 
   // Redux persist
   const persistedReducer = persistReducer(persistConfig, rootReducer)
+  // const persistedReducer = persistCombineReducers(persistConfig, rootReducer)
 
   const store = createStore(
     persistedReducer,
     compose(
       ...enhancers,
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // TODO: Remove Redux DevTools
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // TODO: Remove Redux DevTools on prod
     )
     )
   const persistor = persistStore(store)
