@@ -9,6 +9,8 @@ export function* fetchPosts() {
   // Dispatch a redux action using `put()`
   // @see https://redux-saga.js.org/docs/basics/DispatchingActions.html
   yield put(PostsActions.fetchPostsLoading())
+  // Reset offset
+  yield put(PostsActions.resetOffset())
 
   const existingPosts = yield select(PostsSavedSelector)
   const newPosts = yield call(G4MediaService.getAllPosts, undefined, { per_page: 15, offset: 0 })

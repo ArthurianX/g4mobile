@@ -3,8 +3,8 @@ import createSagaMiddleware from 'redux-saga'
 import { persistReducer, persistStore, createTransform } from 'redux-persist'
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 import immutableTransform from 'redux-persist-transform-immutable'
-import { AsyncStorage } from 'react-native'
 import omit from 'lodash-es/omit'
+import { AsyncStorage } from 'react-native'
 
 /**
  * This import defaults to localStorage for web and AsyncStorage for react-native.
@@ -19,18 +19,17 @@ import storage from 'redux-persist/lib/storage'
 import SetTransform from './SetTransform'
 
 const persistConfig = {
-
-  key: 'root',
-  storage: AsyncStorage,
-  stateReconciler: hardSet,
   transforms: [
     /**
      * This is necessary to support immutable reducers.
      * @see https://github.com/rt2zz/redux-persist-transform-immutable
      */
     immutableTransform(),
-    SetTransform,
-  ]
+    // TODO: Make Offset Reset after each normal refresh
+  ],
+  key: 'root',
+  storage: AsyncStorage,
+  stateReconciler: hardSet,
 }
 
 export default (rootReducer, rootSaga) => {

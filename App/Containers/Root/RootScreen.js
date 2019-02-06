@@ -37,10 +37,10 @@ const lightTheme = {
   dark: false,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#eceff1',
+    primary: '#dde0e2',
     accent: '#5fc1ff',
-    background: '#ddddde',
-    surface: '#f1f1f1',
+    background: '#f1f1f1',
+    surface: '#ddddde',
   },
 }
 

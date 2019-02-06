@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Button, FlatList } from 'react-native'
+import { Text, View, Button, FlatList, ScrollView } from 'react-native'
 import { Title } from 'react-native-paper'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
@@ -52,7 +52,6 @@ class PostsScreen extends React.Component {
         <Text style={Style.text}>{this.props.postsErrorMessage}</Text>
 
         {/*<Button onPress={this.props.fetchMorePosts} title="Mai multe" />*/}
-
       </View>
     )
   }
