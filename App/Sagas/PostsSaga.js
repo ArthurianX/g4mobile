@@ -10,9 +10,8 @@ export function* fetchPosts() {
   // @see https://redux-saga.js.org/docs/basics/DispatchingActions.html
   yield put(PostsActions.fetchPostsLoading())
 
-  const payload = yield select(PostsApiParamsSelector)
   const existingPosts = yield select(PostsSavedSelector)
-  const newPosts = yield call(G4MediaService.getAllPosts, undefined, payload)
+  const newPosts = yield call(G4MediaService.getAllPosts, undefined, { per_page: 15, offset: 0 })
   const posts = PostsMiddleware.mergePostsWithStartupTrim(existingPosts, newPosts)
 
   if (posts) {

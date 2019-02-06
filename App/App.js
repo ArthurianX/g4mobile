@@ -6,7 +6,6 @@ import RootScreen from './Containers/Root/RootScreen'
 import SplashScreen from './Containers/SplashScreen/SplashScreen'
 
 const { store, persistor } = createStore()
-console.log('STORE', store, persistor)
 
 const onBeforeLift = () => {
     // setTimeout(() => {}, 5000);

@@ -12,42 +12,30 @@ import LottieView from 'lottie-react-native'
 
 let animationProgress = new Animated.Value(0)
 
-const changeThemeCbck = (cbck, timer) => {
-  cbck()
-  // The timer creates a bad stutter.
-  // setTimeout(() => cbck(), timer)
-}
-
 class SettingsScreen extends React.Component {
   componentDidMount() {
     // this.props.fetchPosts()
     Animated.timing(animationProgress, {
       toValue: !!this.props.settings.get('theme') / 2,
-      duration: 1000,
-      easing: Easing.linear,
+      duration: 10,
+      easing: Easing.none,
     }).start()
   }
   render() {
     function switchTheme() {
-      console.log('switchTheme funct', this)
       if (!!this.props.settings.get('theme')) {
-        animationProgress = new Animated.Value(0.5)
         Animated.timing(animationProgress, {
           toValue: 0,
           duration: 1500,
           easing: Easing.linear,
-        }).start()
-        changeThemeCbck(this.props.changeTheme, 750)
+        }).start(this.props.changeTheme)
       } else {
-        animationProgress = new Animated.Value(0)
         Animated.timing(animationProgress, {
           toValue: 0.5,
           duration: 2000,
           easing: Easing.linear,
-        }).start()
-        changeThemeCbck(this.props.changeTheme, 350)
+        }).start(this.props.changeTheme)
       }
-      // setTimeout(() => this.props.changeTheme(), 750)
 
     }
     return (

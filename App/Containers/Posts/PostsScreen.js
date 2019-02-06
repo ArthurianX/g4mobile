@@ -8,6 +8,19 @@ import PostsCards from 'App/Components/PostsCards/PostsCards'
 import LoadingActivity from 'App/Components/LoadingActivity/LoadingActivity'
 import Style from './PostsScreenStyle'
 
+const processPosts = (items) => {
+  let result = []
+  if (items) {
+    let numberOfPosts = 0
+    items.map((ele) => {
+      numberOfPosts += 1
+      result.push({id: ele.get('id'), title: ele.get('title'), image: ele.get('jetpack_featured_media_url')})
+    })
+    console.log('PostsScreen => Processing Posts #', numberOfPosts)
+  }
+  return result
+}
+
 class PostsScreen extends React.Component {
   componentDidMount() {
     this.props.fetchMorePosts()
@@ -21,27 +34,16 @@ class PostsScreen extends React.Component {
   //   }
   // }
 
-  render() {
-    function processPosts(items) {
-      let result = []
-      if (items) {
-        let numberOfPosts = 0
-        items.map((ele) => {
-          numberOfPosts += 1
-          result.push({id: ele.get('id'), title: ele.get('title'), image: ele.get('jetpack_featured_media_url')})
-        })
-        console.log('PostsScreen => Processing Posts #', numberOfPosts)
-      }
-      return result
-    }
 
+  render() {
+    let posts = processPosts(this.props.posts)
     return (
       <View style={Style.container}>
         {this.props.posts ? <Title style={Style.title}>Ultimele Articole</Title> : <View />}
         {this.props.postsIsLoading ? <LoadingActivity /> : <View />}
 
         <FlatList
-          data={processPosts(this.props.posts)}
+          data={posts}
           onEndReachedThreshold={0.8}
           onEndReached={this.props.fetchMorePosts}
           renderItem={({ item }) => <PostsCards post={item} />}

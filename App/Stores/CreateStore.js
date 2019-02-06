@@ -1,8 +1,9 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import { persistReducer, persistCombineReducers, persistStore, createTransform } from 'redux-persist'
+import { persistReducer, persistStore, createTransform } from 'redux-persist'
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 import immutableTransform from 'redux-persist-transform-immutable'
+import { AsyncStorage } from 'react-native'
 import omit from 'lodash-es/omit'
 
 /**
@@ -15,30 +16,21 @@ import omit from 'lodash-es/omit'
  * @see https://github.com/CodingZeal/redux-persist-sensitive-storage
  */
 import storage from 'redux-persist/lib/storage'
-
-const blacklistPaths = ['posts.apiCallPageOffset']
+import SetTransform from './SetTransform'
 
 const persistConfig = {
+
+  key: 'root',
+  storage: AsyncStorage,
+  stateReconciler: hardSet,
   transforms: [
     /**
      * This is necessary to support immutable reducers.
      * @see https://github.com/rt2zz/redux-persist-transform-immutable
      */
     immutableTransform(),
-    createTransform((inboundState, key) => {
-      // Blacklist specific props and nested props based on blacklistPaths above
-      if (blacklistPaths.indexOf(key) != -1) return undefined
-      const blacklistPathsForKey = blacklistPaths
-        .filter((path) => path.startsWith(`${key}.`))
-        .map((path) => path.substr(key.length + 1))
-      return blacklistPathsForKey.length
-        ? omit(inboundState, ...blacklistPathsForKey)
-        : inboundState
-    }, null),
-  ],
-  key: 'root',
-  storage: storage,
-  stateReconciler: hardSet,
+    SetTransform,
+  ]
 }
 
 export default (rootReducer, rootSaga) => {
@@ -53,10 +45,10 @@ export default (rootReducer, rootSaga) => {
 
   // Redux persist
   const persistedReducer = persistReducer(persistConfig, rootReducer)
-  // const persistedReducer = persistCombineReducers(persistConfig, rootReducer)
 
   const store = createStore(
     persistedReducer,
+    // compose(...enhancers)
     compose(...enhancers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
     )
   const persistor = persistStore(store)
