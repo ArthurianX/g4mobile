@@ -20,4 +20,13 @@ export default StyleSheet.create({
     textAlign: 'center',
     marginBottom: 5,
   },
+  loadingActivityContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  loadingActivityHorizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10,
+  },
 })

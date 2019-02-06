@@ -1,11 +1,13 @@
 import React from 'react'
-import { Text, View, Button, FlatList, ScrollView } from 'react-native'
+import { Text, View, Button, FlatList } from 'react-native'
 import { Title } from 'react-native-paper'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import PostsActions from 'App/Stores/Posts/Actions'
 import PostsCards from 'App/Components/PostsCards/PostsCards'
+import LoadingActivity from 'App/Components/LoadingActivity/LoadingActivity'
 import Style from './PostsScreenStyle'
+import { withNavigationFocus } from 'react-navigation'
 
 class PostsScreen extends React.Component {
   componentDidMount() {
@@ -14,9 +16,15 @@ class PostsScreen extends React.Component {
     this.props.fetchMorePosts()
   }
 
-  render() {
-    let posts = this.props.postsIsLoading ? [] : this.props.posts
+  // componentDidUpdate(prevProps) {
+  //   console.log('PostsScreen', prevProps)
+  //   if (prevProps.isFocused !== this.props.isFocused) {
+  //     // Use the `this.props.isFocused` boolean
+  //     // Call any action
+  //   }
+  // }
 
+  render() {
     function processPosts(items) {
       let result = []
       if (items) {
@@ -32,21 +40,20 @@ class PostsScreen extends React.Component {
 
     return (
       <View style={Style.container}>
-        <ScrollView>
-          {/* TODO: Removing ^ this will leave the title fixed at the top */}
+        {this.props.posts ? <Title style={Style.title}>Ultimele Articole</Title> : <View />}
+        {this.props.postsIsLoading ? <LoadingActivity /> : <View />}
 
-          <Title style={Style.title}>Ultimele Articole</Title>
+        <FlatList
+          data={processPosts(this.props.posts)}
+          onEndReachedThreshold={0.8}
+          onEndReached={this.props.fetchMorePosts}
+          renderItem={({ item }) => <PostsCards post={item} />}
+        />
+        {/* <Text style={Style.text}>{this.props.isHot ? "It's pretty hot!" : ''}</Text> */}
+        <Text style={Style.text}>{this.props.postsErrorMessage}</Text>
 
-          {/*{this.props.postsIsLoading ? <Component /> : <OtherComponent />}*/}
+        {/*<Button onPress={this.props.fetchMorePosts} title="Mai multe" />*/}
 
-          <FlatList
-            data={processPosts(this.props.posts)}
-            renderItem={({ item }) => <PostsCards post={item} />}
-          />
-          {/* <Text style={Style.text}>{this.props.isHot ? "It's pretty hot!" : ''}</Text> */}
-          <Text style={Style.text}>{this.props.postsErrorMessage}</Text>
-          <Button onPress={this.props.fetchMorePosts} title="Mai multe" />
-        </ScrollView>
       </View>
     )
   }
@@ -67,10 +74,17 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchPosts: () => dispatch(PostsActions.fetchPosts()),
-  fetchMorePosts: () => dispatch(PostsActions.fetchMorePosts()),
+  fetchMorePosts: (distance) => {
+    dispatch(PostsActions.fetchMorePosts())
+    // console.log('fetchMorePosts', distance)
+    // if (distance < 100) {
+    //   console.log('Distance reached, FETCH', distance)
+    //   dispatch(PostsActions.fetchMorePosts())
+    // }
+  },
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PostsScreen)
+)(withNavigationFocus(PostsScreen))
