@@ -1,5 +1,6 @@
 import sortedUniqBy from 'lodash-es/sortedUniqBy'
 import uniqBy from 'lodash-es/uniqBy'
+import findIndex from 'lodash-es/findIndex'
 
 function loggingExtractIds(arr, context) {
   let res = ''
@@ -68,8 +69,14 @@ function mergePostsWithStartupTrim(present, incoming) {
 
 function mergeAndFilter() {}
 
+function getSpecificPost(id, posts) {
+  const processedPosts = convertPresent(posts)
+  return processedPosts[findIndex(processedPosts, { id: id })]
+}
+
 export const PostsMiddleware = {
   mergePosts,
   mergePostsWithStartupTrim,
+  getSpecificPost,
   mergeAndFilter,
 }

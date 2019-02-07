@@ -13,6 +13,9 @@ const { Types, Creators } = createActions({
   fetchPostsFailure: ['errorMessage'],
   // Reset Fetch Posts API Offset
   resetOffset: null,
+  openPost: ['post'],
+  openPostModal: ['post'],
+  closePost: null,
 })
 
 export const PostsTypes = Types

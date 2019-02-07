@@ -9,6 +9,7 @@ import StartupActions from 'App/Stores/Startup/Actions'
 import RootToMainScreen from './RootToMainScreen'
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 import { GetSettingsSelector } from 'App/Stores/Settings/Selectors'
+import PostModal from 'App/Components/PostModal/PostModal'
 
 /**
  * The root screen contains the application's navigation.
@@ -76,6 +77,7 @@ class RootScreen extends Component {
             }}
           />
         </View>
+        <PostModal />
       </PaperProvider>
     )
   }

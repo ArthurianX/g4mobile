@@ -45,3 +45,13 @@ export function* fetchMorePosts() {
     )
   }
 }
+
+export function* openPost(payload) {
+  const posts = yield select(PostsSavedSelector)
+  const foundPost = PostsMiddleware.getSpecificPost(payload.post.id, posts)
+  yield put(PostsActions.openPostModal(foundPost))
+}
+
+export function* closePost() {
+  yield put(PostsActions.closePost())
+}

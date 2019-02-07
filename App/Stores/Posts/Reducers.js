@@ -31,9 +31,20 @@ export const fetchPostsFailure = (state, { errorMessage }) =>
     postsErrorMessage: errorMessage,
   })
 
-export const resetOffset = (state, { errorMessage }) =>
+export const resetOffset = (state) =>
   state.merge({
     apiCallPageOffset: 0,
+    openPost: null,
+  })
+
+export const openPostModal = (state, { post }) =>
+  state.merge({
+    openPost: post,
+  })
+
+export const closePost = (state) =>
+  state.merge({
+    openPost: null,
   })
 
 
@@ -44,4 +55,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [PostsTypes.FETCH_POSTS_FAILURE]: fetchPostsFailure,
   [PostsTypes.FETCH_POSTS_FAILURE]: fetchPostsFailure,
   [PostsTypes.RESET_OFFSET]: resetOffset,
+  [PostsTypes.OPEN_POST_MODAL]: openPostModal,
+  [PostsTypes.CLOSE_POST]: closePost,
 })
