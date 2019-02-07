@@ -9,7 +9,8 @@ class SplashScreen extends React.Component {
   render() {
     return (
       <View style={[styles.container, { backgroundColor: this.props.theme.colors.background }]}>
-         <LottieView source={Animations.santa} autoPlay loop resizeMode={'cover'} />
+          <LottieView source={Animations.logo} autoPlay loop={false} resizeMode={'center'} />
+
       </View>
     )
   }

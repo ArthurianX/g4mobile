@@ -1,9 +1,8 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import { persistReducer, persistStore, createTransform } from 'redux-persist'
+import { persistReducer, persistStore } from 'redux-persist'
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 import immutableTransform from 'redux-persist-transform-immutable'
-import omit from 'lodash-es/omit'
 import { AsyncStorage } from 'react-native'
 
 /**
@@ -15,8 +14,6 @@ import { AsyncStorage } from 'react-native'
  * If you need to store sensitive information, use redux-persist-sensitive-storage.
  * @see https://github.com/CodingZeal/redux-persist-sensitive-storage
  */
-import storage from 'redux-persist/lib/storage'
-import SetTransform from './SetTransform'
 
 const persistConfig = {
   transforms: [

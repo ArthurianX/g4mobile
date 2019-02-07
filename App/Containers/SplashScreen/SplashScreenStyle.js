@@ -17,4 +17,13 @@ export default StyleSheet.create({
     width: 70,
     backgroundColor: 'white',
   },
+  themeContainerLottie: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    transform: [
+      { scaleX: 0.8 },
+      { scaleY: 0.8 },
+    ],
+  },
 })

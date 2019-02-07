@@ -15,5 +15,5 @@ export function* startup() {
   // ...
 
   // When those operations are finished we redirect to the main screen
-  setTimeout(() => NavigationService.navigateAndReset('MainScreen'), 2000)
+  setTimeout(() => NavigationService.navigateAndReset('MainScreen'), 4000)
 }
