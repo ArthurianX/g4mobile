@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -60,6 +59,7 @@
 		CB1553DBD2C542FB8724EEEF /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8E974C66784FA5B953B7B0 /* libRNVectorIcons.a */; };
 		CDF68DECA6A6411F81C4AEFF /* libLottie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBD56C4F019470881D3C6D8 /* libLottie.a */; };
 		F3CBC4071193473D8187906C /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B521105F7385405A89E3EB5D /* FontAwesome5_Regular.ttf */; };
+		1D1D0E74DE544D9C9466F004 /* libRNCWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FB75A7937F64F0E872CFC1D /* libRNCWebView.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -458,6 +458,8 @@
 		EC2102EA3ABA4D1A86F4141E /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		ED64726B9347493EB508CFD1 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		F76DA155E7394C078432F9B5 /* Lottie.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = Lottie.xcodeproj; path = "../node_modules/lottie-ios/Lottie.xcodeproj"; sourceTree = "<group>"; };
+		A6C3688C3F3346FBBD9EB8B2 /* RNCWebView.xcodeproj */ = {isa = PBXFileReference; name = "RNCWebView.xcodeproj"; path = "../node_modules/react-native-webview/ios/RNCWebView.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		0FB75A7937F64F0E872CFC1D /* libRNCWebView.a */ = {isa = PBXFileReference; name = "libRNCWebView.a"; path = "libRNCWebView.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -491,6 +493,7 @@
 				CDF68DECA6A6411F81C4AEFF /* libLottie.a in Frameworks */,
 				6ECF332C572147ADB6B3552E /* libLottieReactNative.a in Frameworks */,
 				CB1553DBD2C542FB8724EEEF /* libRNVectorIcons.a in Frameworks */,
+				1D1D0E74DE544D9C9466F004 /* libRNCWebView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,6 +684,7 @@
 				F76DA155E7394C078432F9B5 /* Lottie.xcodeproj */,
 				313F9C411EBD4A16B0935E9E /* LottieReactNative.xcodeproj */,
 				ED64726B9347493EB508CFD1 /* RNVectorIcons.xcodeproj */,
+				A6C3688C3F3346FBBD9EB8B2 /* RNCWebView.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1448,6 +1452,7 @@
 					"$(SRCROOT)/../node_modules/lottie-ios/lottie-ios/Classes/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 				);
 				INFOPLIST_FILE = G4MobileTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1455,6 +1460,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)/System/Library/Frameworks\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1479,6 +1485,7 @@
 					"$(SRCROOT)/../node_modules/lottie-ios/lottie-ios/Classes/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 				);
 				INFOPLIST_FILE = G4MobileTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1486,6 +1493,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)/System/Library/Frameworks\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1511,6 +1519,7 @@
 					"$(SRCROOT)/../node_modules/lottie-ios/lottie-ios/Classes/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 				);
 				INFOPLIST_FILE = G4Mobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1534,6 +1543,7 @@
 					"$(SRCROOT)/../node_modules/lottie-ios/lottie-ios/Classes/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 				);
 				INFOPLIST_FILE = G4Mobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1564,12 +1574,14 @@
 					"$(SRCROOT)/../node_modules/lottie-ios/lottie-ios/Classes/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 				);
 				INFOPLIST_FILE = "G4Mobile-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)/System/Library/Frameworks\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1604,12 +1616,14 @@
 					"$(SRCROOT)/../node_modules/lottie-ios/lottie-ios/Classes/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 				);
 				INFOPLIST_FILE = "G4Mobile-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)/System/Library/Frameworks\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1643,12 +1657,14 @@
 					"$(SRCROOT)/../node_modules/lottie-ios/lottie-ios/Classes/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 				);
 				INFOPLIST_FILE = "G4Mobile-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)/System/Library/Frameworks\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1682,12 +1698,14 @@
 					"$(SRCROOT)/../node_modules/lottie-ios/lottie-ios/Classes/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
+					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 				);
 				INFOPLIST_FILE = "G4Mobile-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)/System/Library/Frameworks\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
