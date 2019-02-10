@@ -15,6 +15,7 @@ const { Types, Creators } = createActions({
   resetOffset: null,
   openPost: ['post'],
   openPostModal: ['post'],
+  closePostModal: null,
   closePost: null,
 })
 

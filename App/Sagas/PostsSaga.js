@@ -53,5 +53,5 @@ export function* openPost(payload) {
 }
 
 export function* closePost() {
-  yield put(PostsActions.closePost())
+  yield put(PostsActions.closePostModal())
 }

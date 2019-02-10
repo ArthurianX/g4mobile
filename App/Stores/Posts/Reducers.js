@@ -42,7 +42,7 @@ export const openPostModal = (state, { post }) =>
     openPost: post,
   })
 
-export const closePost = (state) =>
+export const closePostModal = (state) =>
   state.merge({
     openPost: null,
   })
@@ -56,5 +56,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [PostsTypes.FETCH_POSTS_FAILURE]: fetchPostsFailure,
   [PostsTypes.RESET_OFFSET]: resetOffset,
   [PostsTypes.OPEN_POST_MODAL]: openPostModal,
-  [PostsTypes.CLOSE_POST]: closePost,
+  [PostsTypes.CLOSE_POST_MODAL]: closePostModal,
 })

@@ -1,20 +1,24 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
 import PostsScreen from 'App/Containers/Posts/PostsScreen'
 import FilteredPostsScreen from 'App/Containers/FilteredPosts/FilteredPostsScreen'
 import FeedbackScreen from 'App/Containers/Feedback/FeedbackScreen'
 import SettingsScreen from 'App/Containers/Settings/SettingsScreen'
-import { BottomNavigation, Text } from 'react-native-paper';
+import { BottomNavigation, Icon, Text, withTheme } from 'react-native-paper'
+import SmallLogo from 'App/Components/SmallLogo/SmallLogo'
 
-export default class RootToMainScreen extends Component {
+class RootToMainScreen extends Component {
   state = {
     index: 0, // TODO: This changes the main page.
     routes: [
-      { key: 'main', title: 'Articole', icon: 'list' },
-      { key: 'filtered', title: 'Filtrele Mele', icon: 'bookmark' },
-      { key: 'logo', title: '', icon: 'history' },
-      { key: 'settings', title: 'Setari', icon: 'settings' },
-      { key: 'feedback', title: 'Feedback', icon: 'help' },
+      { key: 'main', title: 'Articole', icon: 'list',
+        color: this.props.theme.bottomNavBg1 },
+      { key: 'filtered', title: 'Filtrele Mele', icon: 'bookmark',
+        color: this.props.theme.bottomNavBg2 },
+      { key: 'logo', title: '', icon: () => (<SmallLogo />) },
+      { key: 'settings', title: 'Setari', icon: 'settings',
+        color: this.props.theme.bottomNavBg3 },
+      { key: 'feedback', title: 'Feedback', icon: 'help',
+        color: this.props.theme.bottomNavBg1 },
     ],
   };
 
@@ -36,6 +40,9 @@ export default class RootToMainScreen extends Component {
   render() {
     return (
       <BottomNavigation
+        labeled={false}
+        activeColor={this.props.theme.text}
+        inactiveColor={this.props.theme.disabled}
         navigationState={this.state}
         onIndexChange={this._handleIndexChange}
         renderScene={this._renderScene}
@@ -43,3 +50,7 @@ export default class RootToMainScreen extends Component {
     )
   }
 }
+
+// {{ color: colors.primary }}
+
+export default withTheme(RootToMainScreen);

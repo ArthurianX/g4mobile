@@ -6,10 +6,12 @@ class PostsCards extends React.Component {
   render() {
     return (
       <Card
-        elevation={5} style={{ marginBottom: 12, marginLeft: 12, marginRight: 12 }}>
-        <Card.Cover source={{ uri: this.props.post.image }} />
+        elevation={3} style={{ marginBottom: 14, marginLeft: 0, marginRight: 0 }}>
+        <Card.Cover source={{ uri: this.props.post.image || 'https://via.placeholder.com/600x400?text=G4' }} />
         <Card.Content>
-          <Paragraph>{this.props.post.title}</Paragraph>
+          <Paragraph style={{fontWeight: 'bold', fontSize: 16, lineHeight: 16, marginTop: 10}}>
+            {this.props.post.title}
+          </Paragraph>
         </Card.Content>
       </Card>
     )

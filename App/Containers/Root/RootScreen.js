@@ -10,6 +10,7 @@ import RootToMainScreen from './RootToMainScreen'
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 import { GetSettingsSelector } from 'App/Stores/Settings/Selectors'
 import PostModal from 'App/Components/PostModal/PostModal'
+import Colors from 'App/Theme/Colors'
 
 /**
  * The root screen contains the application's navigation.
@@ -38,10 +39,7 @@ const lightTheme = {
   dark: false,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#dde0e2',
-    accent: '#5fc1ff',
-    background: '#f1f1f1',
-    surface: '#ddddde',
+    ...Colors.lightTheme.colors,
   },
 }
 
@@ -51,11 +49,7 @@ const darkTheme = {
   dark: true,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#1b1b1b',
-    accent: '#111439',
-    background: '#424242',
-    surface: '#6d6d6d',
-    text: '#f9f9f9',
+    ...Colors.darkTheme.colors,
   },
 }
 
