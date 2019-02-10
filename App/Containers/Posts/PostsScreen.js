@@ -17,7 +17,7 @@ const processPosts = (items) => {
       numberOfPosts += 1
       result.push({id: ele.get('id'), title: ele.get('title'), image: ele.get('jetpack_featured_media_url')})
     })
-    console.log('PostsScreen => Processing Posts #', numberOfPosts)
+    // console.log('PostsScreen => Processing Posts #', numberOfPosts)
   }
   return result
 }

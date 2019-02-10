@@ -10,7 +10,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    //...Fonts.style.h2,
+    // ...Fonts.style.h2,
     textAlign: 'center',
     marginTop: 30,
     marginBottom: 10,
@@ -19,5 +19,14 @@ export default StyleSheet.create({
     ...Fonts.style.normal,
     textAlign: 'center',
     marginBottom: 5,
+  },
+  loadingActivityContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  loadingActivityHorizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10,
   },
 })
