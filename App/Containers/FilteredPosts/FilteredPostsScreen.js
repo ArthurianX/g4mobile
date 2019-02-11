@@ -1,12 +1,13 @@
 import React from 'react'
 import { Text, View, FlatList, TouchableOpacity } from 'react-native'
-import { Title } from 'react-native-paper'
+import { Title, Surface, Button, withTheme } from 'react-native-paper'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import PostsActions from 'App/Stores/Posts/Actions'
 import PostsCards from 'App/Components/PostsCards/PostsCards'
 import LoadingActivity from 'App/Components/LoadingActivity/LoadingActivity'
 import Style from './FilteredPostsScreenStyle'
+import PostsFilters from 'App/Components/PostsFilters/PostsFilters'
 
 let posts = []
 const processPosts = (items) => {
@@ -56,7 +57,7 @@ class FilteredPostsScreen extends React.Component {
     posts = processPosts(this.props.posts)
     return (
       <View style={[Style.container, { flex: 1 }]}>
-        {this.props.posts ? <Title style={Style.title}>Ultimele Articole</Title> : <View />}
+        {this.props.posts ? <Title style={Style.title}>Articole Filtrate</Title> : <View />}
         {this.props.postsIsLoading ? <LoadingActivity /> : <View />}
 
         {/* Commented FlatList Props, they don't work properly.
@@ -65,6 +66,7 @@ class FilteredPostsScreen extends React.Component {
         refreshing={this.props.postsIsLoading}
         onViewableItemsChanged={onViewableItemsChanged}
         keyExtractor={keyExtractor} */}
+        <PostsFilters />
         <FlatList
           data={posts}
           onEndReachedThreshold={0.8}
@@ -104,4 +106,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(FilteredPostsScreen)
+)(withTheme(FilteredPostsScreen))

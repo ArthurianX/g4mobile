@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { createStackNavigator } from 'react-navigation'
 import NavigationService from 'App/Services/NavigationService'
-import { View } from 'react-native'
+import { StatusBar, View } from 'react-native'
 import styles from './RootScreenStyle'
 import SplashScreen from 'App/Containers/SplashScreen/SplashScreen'
 import { connect } from 'react-redux'
@@ -63,6 +63,9 @@ class RootScreen extends Component {
     const selectedTheme = this.props.settings.get('theme') ? darkTheme : lightTheme
     return (
       <PaperProvider theme={selectedTheme}>
+        <StatusBar
+          barStyle={this.props.settings.get('theme') ? 'light-content': 'dark-content'}
+        />
         <View style={styles.container}>
           <AppNav
             // Initialize the NavigationService (see https://reactnavigation.org/docs/en/navigating-without-navigation-prop.html)

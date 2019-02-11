@@ -10,7 +10,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    // ...Fonts.style.h2,
+    fontSize: 16,
     textAlign: 'center',
     marginTop: 30,
     marginBottom: 10,

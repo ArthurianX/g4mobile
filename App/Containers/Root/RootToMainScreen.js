@@ -8,16 +8,16 @@ import SmallLogo from 'App/Components/SmallLogo/SmallLogo'
 
 class RootToMainScreen extends Component {
   state = {
-    index: 0, // TODO: This changes the main page.
+    index: 1, // TODO: MAINSWITCH - This changes the main page.
     routes: [
-      { key: 'main', title: 'Articole', icon: 'list',
+      { key: 'main', title: 'Articole', icon: 'line-style',
         color: this.props.theme.bottomNavBg1 },
-      { key: 'filtered', title: 'Filtrele Mele', icon: 'bookmark',
+      { key: 'filtered', title: 'Filtrele Mele', icon: 'sort',
         color: this.props.theme.bottomNavBg2 },
       { key: 'logo', title: '', icon: () => (<SmallLogo />) },
       { key: 'settings', title: 'Setari', icon: 'settings',
         color: this.props.theme.bottomNavBg3 },
-      { key: 'feedback', title: 'Feedback', icon: 'help',
+      { key: 'feedback', title: 'Feedback', icon: 'feedback',
         color: this.props.theme.bottomNavBg1 },
     ],
   };
