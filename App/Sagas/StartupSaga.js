@@ -15,7 +15,7 @@ export function* startup() {
   // ...
 
   // When those operations are finished we redirect to the main screen
-  NavigationService.navigateAndReset('MainScreen')
-  //setTimeout(() => NavigationService.navigateAndReset('MainScreen'), 4000)
+  // NavigationService.navigateAndReset('MainScreen')
+  setTimeout(() => NavigationService.navigateAndReset('MainScreen'), 4000)
   // TODO: MAINSWITCH - Uncomment the setTimeout to let the SplashScreen work.
 }
