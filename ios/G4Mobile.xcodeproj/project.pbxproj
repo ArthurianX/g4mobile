@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -23,6 +24,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		1D1D0E74DE544D9C9466F004 /* libRNCWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FB75A7937F64F0E872CFC1D /* libRNCWebView.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -45,6 +47,7 @@
 		6ECF332C572147ADB6B3552E /* libLottieReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 150BA520475E43F5AFE04D75 /* libLottieReactNative.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8AB844F882AB43499AE0FDFC /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F170455C5F44A168D8748BD /* MaterialIcons.ttf */; };
+		8E0174942213791700F8ED94 /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E0174672213791700F8ED94 /* Icon-120.png */; };
 		8E0BD293220633F800FDEE61 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0BD2892206337000FDEE61 /* Lottie.framework */; };
 		8E0BD294220633F800FDEE61 /* Lottie.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0BD2892206337000FDEE61 /* Lottie.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A0BD0B8A2B9946F4BEF9792B /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2DFB3D2DAFF49A28B44EE6A /* MaterialCommunityIcons.ttf */; };
@@ -59,7 +62,6 @@
 		CB1553DBD2C542FB8724EEEF /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD8E974C66784FA5B953B7B0 /* libRNVectorIcons.a */; };
 		CDF68DECA6A6411F81C4AEFF /* libLottie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBD56C4F019470881D3C6D8 /* libLottie.a */; };
 		F3CBC4071193473D8187906C /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B521105F7385405A89E3EB5D /* FontAwesome5_Regular.ttf */; };
-		1D1D0E74DE544D9C9466F004 /* libRNCWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FB75A7937F64F0E872CFC1D /* libRNCWebView.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -329,6 +331,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		8E01743522135DDC00F8ED94 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A6C3688C3F3346FBBD9EB8B2 /* RNCWebView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNCWebView;
+		};
 		8E07465E220B19F8002A8956 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ED64726B9347493EB508CFD1 /* RNVectorIcons.xcodeproj */;
@@ -420,6 +429,7 @@
 		00E356F21AD99517003FC87E /* G4MobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = G4MobileTests.m; sourceTree = "<group>"; };
 		08DD419EDF444E309DB70802 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		0F261A1C34CF4D31AEA75CF4 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		0FB75A7937F64F0E872CFC1D /* libRNCWebView.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCWebView.a; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* G4Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = G4Mobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -448,6 +458,8 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		87205764DF3345DC9927927A /* Lottie.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Lottie.framework; path = System/Library/Frameworks/Lottie.framework; sourceTree = SDKROOT; };
+		8E0174672213791700F8ED94 /* Icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-120.png"; path = "appiconmaker.co_ios/Icon-120.png"; sourceTree = "<group>"; };
+		A6C3688C3F3346FBBD9EB8B2 /* RNCWebView.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCWebView.xcodeproj; path = "../node_modules/react-native-webview/ios/RNCWebView.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		AE1E627FD088424CBE041F26 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		B521105F7385405A89E3EB5D /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
@@ -458,8 +470,6 @@
 		EC2102EA3ABA4D1A86F4141E /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		ED64726B9347493EB508CFD1 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		F76DA155E7394C078432F9B5 /* Lottie.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = Lottie.xcodeproj; path = "../node_modules/lottie-ios/Lottie.xcodeproj"; sourceTree = "<group>"; };
-		A6C3688C3F3346FBBD9EB8B2 /* RNCWebView.xcodeproj */ = {isa = PBXFileReference; name = "RNCWebView.xcodeproj"; path = "../node_modules/react-native-webview/ios/RNCWebView.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		0FB75A7937F64F0E872CFC1D /* libRNCWebView.a */ = {isa = PBXFileReference; name = "libRNCWebView.a"; path = "libRNCWebView.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -611,6 +621,7 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				8E0174672213791700F8ED94 /* Icon-120.png */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -725,6 +736,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8E01743222135DDA00F8ED94 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8E01743622135DDC00F8ED94 /* libRNCWebView.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		8E07465A220B19F5002A8956 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -742,6 +761,7 @@
 				150BA520475E43F5AFE04D75 /* libLottieReactNative.a */,
 				CD8E974C66784FA5B953B7B0 /* libRNVectorIcons.a */,
 				645A981718514855B665D02F /* libRNVectorIcons-tvOS.a */,
+				0FB75A7937F64F0E872CFC1D /* libRNCWebView.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -884,14 +904,21 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = Y3W4S93L93;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = Y3W4S93L93;
+						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Y3W4S93L93;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E48F1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Y3W4S93L93;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
@@ -964,6 +991,10 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = 8E01743222135DDA00F8ED94 /* Products */;
+					ProjectRef = A6C3688C3F3346FBBD9EB8B2 /* RNCWebView.xcodeproj */;
 				},
 				{
 					ProductGroup = 8E07465A220B19F5002A8956 /* Products */;
@@ -1233,6 +1264,13 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		8E01743622135DDC00F8ED94 /* libRNCWebView.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNCWebView.a;
+			remoteRef = 8E01743522135DDC00F8ED94 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		8E07465F220B19F8002A8956 /* libRNVectorIcons.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1319,6 +1357,7 @@
 				8AB844F882AB43499AE0FDFC /* MaterialIcons.ttf in Resources */,
 				B6DABA1995AA40148B35B2BF /* Octicons.ttf in Resources */,
 				4F91F77350B842CE8BC87639 /* SimpleLineIcons.ttf in Resources */,
+				8E0174942213791700F8ED94 /* Icon-120.png in Resources */,
 				415D2DD89527499D81FE8812 /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1443,6 +1482,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = Y3W4S93L93;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1480,6 +1520,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = Y3W4S93L93;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/lottie-ios/lottie-ios/Classes/**",
@@ -1504,6 +1545,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9332d2bc-0b13-4aad-9b48-ed3100a5a535";
+				PROVISIONING_PROFILE_SPECIFIER = "org.karthurk.g4mobile AppStore";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/G4Mobile.app/G4Mobile";
 			};
 			name = Release;
@@ -1512,8 +1555,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "Don't Code Sign";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 7;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = Y3W4S93L93;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/lottie-ios/lottie-ios/Classes/**",
@@ -1528,7 +1575,9 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.karthurk.g4mobile;
 				PRODUCT_NAME = G4Mobile;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1537,7 +1586,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_TEAM = Y3W4S93L93;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/lottie-ios/lottie-ios/Classes/**",
@@ -1552,7 +1604,10 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.karthurk.g4mobile;
 				PRODUCT_NAME = G4Mobile;
+				PROVISIONING_PROFILE = "9332d2bc-0b13-4aad-9b48-ed3100a5a535";
+				PROVISIONING_PROFILE_SPECIFIER = "org.karthurk.g4mobile AppStore";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1567,6 +1622,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Y3W4S93L93;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
@@ -1610,6 +1666,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Y3W4S93L93;
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1635,6 +1692,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.G4Mobile-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9332d2bc-0b13-4aad-9b48-ed3100a5a535";
+				PROVISIONING_PROFILE_SPECIFIER = "org.karthurk.g4mobile AppStore";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
@@ -1650,6 +1709,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Y3W4S93L93;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
@@ -1692,6 +1752,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Y3W4S93L93;
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1717,6 +1778,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.G4Mobile-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9332d2bc-0b13-4aad-9b48-ed3100a5a535";
+				PROVISIONING_PROFILE_SPECIFIER = "org.karthurk.g4mobile AppStore";
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/G4Mobile-tvOS.app/G4Mobile-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
