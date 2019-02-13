@@ -1,4 +1,4 @@
-package com.g4mobile;
+package com.karthurk.g4mobile;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "G4Mobile";
+        return "G4 Media Mobile";
     }
 }

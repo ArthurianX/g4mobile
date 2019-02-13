@@ -1,4 +1,4 @@
-package com.g4mobile;
+package com.karthurk.g4mobile;
 
 import android.app.Application;
 
