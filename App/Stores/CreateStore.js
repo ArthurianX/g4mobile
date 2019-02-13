@@ -42,11 +42,15 @@ export default (rootReducer, rootSaga) => {
   // Redux persist
   const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-  const store = createStore(
-    persistedReducer,
-    compose(...enhancers)
-    //compose(...enhancers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
-    )
+
+  let store = null
+
+  if (__DEV__) {
+    store = createStore(persistedReducer, compose(...enhancers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
+  } else {
+    store = createStore(persistedReducer, compose(...enhancers))
+  }
+
   const persistor = persistStore(store)
 
   // TODO: Uncomment this to purge Redux Store
