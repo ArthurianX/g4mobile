@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga'
 import { persistReducer, persistStore } from 'redux-persist'
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 import immutableTransform from 'redux-persist-transform-immutable'
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage, Platform } from 'react-native'
 
 /**
  * This import defaults to localStorage for web and AsyncStorage for react-native.
@@ -42,13 +42,17 @@ export default (rootReducer, rootSaga) => {
   // Redux persist
   const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-  // const store = createStore(persistedReducer, compose(...enhancers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
-  const store = createStore(persistedReducer, compose(...enhancers))
-  // if (__DEV__ !== undefined) {
-  //
-  // } else {
-  //
-  // }
+  let store = null
+
+  if (Platform.OS === 'ios') {
+    if (__DEV__) {
+      store = createStore(persistedReducer, compose(...enhancers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
+    } else {
+      store = createStore(persistedReducer, compose(...enhancers))
+    }
+  } else {
+    store = createStore(persistedReducer, compose(...enhancers))
+  }
 
   const persistor = persistStore(store)
 
