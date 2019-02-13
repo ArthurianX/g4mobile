@@ -42,14 +42,13 @@ export default (rootReducer, rootSaga) => {
   // Redux persist
   const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-
-  let store = null
-
-  if (__DEV__) {
-    store = createStore(persistedReducer, compose(...enhancers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
-  } else {
-    store = createStore(persistedReducer, compose(...enhancers))
-  }
+  // const store = createStore(persistedReducer, compose(...enhancers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
+  const store = createStore(persistedReducer, compose(...enhancers))
+  // if (__DEV__ !== undefined) {
+  //
+  // } else {
+  //
+  // }
 
   const persistor = persistStore(store)
 
