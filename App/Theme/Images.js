@@ -3,5 +3,6 @@
  */
 
 export default {
-  g4logo: require('../Images/g4bta.png'),
+  g4logo: require('../Images/G4MediaLogoSmall.png'),
+  g4logowhite: require('../Images/G4MediaLogoSmallWhite.png'),
 }
