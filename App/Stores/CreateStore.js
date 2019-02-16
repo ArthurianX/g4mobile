@@ -43,13 +43,14 @@ export default (rootReducer, rootSaga) => {
   const persistedReducer = persistReducer(persistConfig, rootReducer)
 
   let store = null
-
-  if (Platform.OS === 'ios') {
-    if (__DEV__) {
-      store = createStore(persistedReducer, compose(...enhancers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
-    } else {
-      store = createStore(persistedReducer, compose(...enhancers))
-    }
+  if (Platform.OS === 'ios' && __DEV__) {
+    store = createStore(
+      persistedReducer,
+      compose(
+        ...enhancers,
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+      )
+    )
   } else {
     store = createStore(persistedReducer, compose(...enhancers))
   }

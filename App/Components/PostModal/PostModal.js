@@ -1,11 +1,11 @@
 import React from 'react'
-import { Appbar, Modal, Paragraph, Portal, Surface, Title, withTheme } from 'react-native-paper'
+import { Appbar, Modal, Portal, Title, withTheme } from 'react-native-paper'
 import PropTypes from 'prop-types'
 import PostsActions from '../../Stores/Posts/Actions'
 import { connect } from 'react-redux'
 import Style from './PostModalStyles'
 import { WebView } from 'react-native-webview'
-import { ScrollView, View, Dimensions } from 'react-native';
+import { View } from 'react-native'
 
 const getContent = (props) => {
   let htmlStyle = `<style>
