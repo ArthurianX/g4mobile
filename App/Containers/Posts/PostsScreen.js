@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View, FlatList, TouchableOpacity } from 'react-native'
-import { Title } from 'react-native-paper'
+import { withTheme } from 'react-native-paper'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import PostsActions from 'App/Stores/Posts/Actions'
@@ -56,7 +56,6 @@ class PostsScreen extends React.Component {
     posts = processPosts(this.props.posts)
     return (
       <View style={[Style.container, { flex: 1 }]}>
-        {this.props.posts ? <Title style={Style.title}>Ultimele Articole</Title> : <View />}
         {this.props.postsIsLoading ? <LoadingActivity /> : <View />}
 
         {/* Commented FlatList Props, they don't work properly.
@@ -69,6 +68,7 @@ class PostsScreen extends React.Component {
           data={posts}
           onEndReachedThreshold={0.8}
           onEndReached={this.props.fetchMorePosts}
+          style={{ backgroundColor: this.props.theme.colors.background, paddingTop: 20 }}
           renderItem={({ item }) => <TouchableOpacity onPress={onPressItem.bind(this, item)}><PostsCards post={item} /></TouchableOpacity>}
         />
         {/* <Text style={Style.text}>{this.props.isHot ? "It's pretty hot!" : ''}</Text> */}
@@ -104,4 +104,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PostsScreen)
+)(withTheme(PostsScreen))

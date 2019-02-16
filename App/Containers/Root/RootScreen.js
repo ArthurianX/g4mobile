@@ -6,7 +6,7 @@ import styles from './RootScreenStyle'
 import SplashScreen from 'App/Containers/SplashScreen/SplashScreen'
 import { connect } from 'react-redux'
 import StartupActions from 'App/Stores/Startup/Actions'
-import RootToMainScreen from './RootToMainScreen'
+import DrawerScreen from './DrawerScreen'
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 import { GetSettingsSelector } from 'App/Stores/Settings/Selectors'
 import PostModal from 'App/Components/PostModal/PostModal'
@@ -19,15 +19,11 @@ import Colors from 'App/Theme/Colors'
  */
 const AppNav = createStackNavigator(
   {
-    // Create the application routes here (the key is the route name, the value is the target screen)
-    // See https://reactnavigation.org/docs/en/stack-navigator.html#routeconfigs
     SplashScreen: SplashScreen,
-    MainScreen: RootToMainScreen,
+    MainScreen: DrawerScreen, // Navigation to it happens in StartupSaga.js
   },
   {
-    // By default the application will show the splash screen
     initialRouteName: 'SplashScreen',
-    // See https://reactnavigation.org/docs/en/stack-navigator.html#stacknavigatorconfig
     headerMode: 'none',
     mode: 'card',
   }
@@ -35,7 +31,7 @@ const AppNav = createStackNavigator(
 
 const lightTheme = {
   ...DefaultTheme,
-  roundness: 2,
+  roundness: 4,
   dark: false,
   colors: {
     ...DefaultTheme.colors,
@@ -45,7 +41,7 @@ const lightTheme = {
 
 const darkTheme = {
   ...DefaultTheme,
-  roundness: 2,
+  roundness: 4,
   dark: true,
   colors: {
     ...DefaultTheme.colors,
@@ -74,7 +70,7 @@ class RootScreen extends Component {
             }}
           />
         </View>
-        <PostModal />
+        <PostModal />{/*TODO:REPLACE HTHIS*/}
       </PaperProvider>
     )
   }
