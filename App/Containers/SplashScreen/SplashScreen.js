@@ -8,9 +8,9 @@ import { withTheme } from 'react-native-paper'
 class SplashScreen extends React.Component {
   render() {
     return (
-      <View style={[styles.container, { backgroundColor: this.props.theme.colors.background }]}>
-          <LottieView source={Animations.logo} autoPlay loop={false} resizeMode={'center'} />
-
+      <View style={[styles.container, { backgroundColor: '#15202A' }]}>
+      { /* <View style={[styles.container, { backgroundColor: this.props.theme.colors.background }]}> */ }
+          <LottieView source={Animations.transition} autoPlay loop={true} resizeMode={'cover'} />
       </View>
     )
   }
