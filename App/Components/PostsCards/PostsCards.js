@@ -1,18 +1,40 @@
 import React from 'react'
-import { Card, Paragraph } from 'react-native-paper'
+import { Card, Paragraph, Text, IconButton } from 'react-native-paper'
 import PropTypes from 'prop-types'
+import Styles from './PostsCardsStyles'
 
 class PostsCards extends React.Component {
   render() {
     return (
       <Card
-        elevation={3} style={{ marginBottom: 14, marginLeft: 0, marginRight: 0 }}>
+        elevation={0}
+        style={Styles.card}>
         <Card.Cover source={{ uri: this.props.post.image || 'https://via.placeholder.com/600x400?text=G4' }} />
-        <Card.Content>
-          <Paragraph style={{fontWeight: 'bold', fontSize: 16, lineHeight: 16, marginTop: 10}}>
-            {this.props.post.title}
-          </Paragraph>
-        </Card.Content>
+        <Text
+          style={Styles.paragraph}>
+          {this.props.post.title}
+        </Text>
+        <Card.Actions style={Styles.actions}>
+          <IconButton
+            icon="bookmark-border"
+            color={'#7f7f7f'}
+            size={25}
+            onPress={() => console.log('Pressed', this.props.post)}
+          />
+          <IconButton
+            icon="launch"
+            color={'#7f7f7f'}
+            size={25}
+            onPress={() => console.log('Pressed')}
+          />
+          <IconButton
+            icon="share"
+            color={'#7f7f7f'}
+            size={25}
+            onPress={() => console.log('Pressed')}
+          />
+
+        </Card.Actions>
       </Card>
     )
   }

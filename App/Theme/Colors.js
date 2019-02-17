@@ -1,5 +1,3 @@
-import { DefaultTheme } from 'react-native-paper'
-
 /**
  * This file contains the application's colors.
  *
@@ -15,18 +13,15 @@ export default {
     // dark: boolean,
     // roundness: number,
     colors: {
-      primary: '#feffff',
-      background: '#feffff',
-      surface: '#feffff',
+      primary: '#fff',
+      background: '#fff',
+      surface: '#fff',
       accent: '#5fc1ff',
       // error: string,
-      text: '#535553',
+      text: '#15202A',
       disabled: '#babbbc',
       // placeholder: string,
-      backdrop: '#edf0ee',
-      bottomNavBg1: '#f7f7f7',
-      bottomNavBg2: '#e5e5e5',
-      bottomNavBg3: '#f9f9f9',
+      backdrop: '#15202a',
     },
     fonts: {
       // regular: string,
