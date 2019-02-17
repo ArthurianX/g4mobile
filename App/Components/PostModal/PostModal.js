@@ -5,13 +5,39 @@ import PostsActions from '../../Stores/Posts/Actions'
 import { connect } from 'react-redux'
 import Style from './PostModalStyles'
 import { WebView } from 'react-native-webview'
-import { View } from 'react-native'
+import { Platform, View } from 'react-native'
+
+const platformSpecificFontPath = Platform.OS === 'ios' ? 'file:///assets/fonts/' : 'file:///android_asset/fonts/'
 
 const getContent = (props) => {
-  let htmlStyle = `<style>
+  let htmlStyle = `<head title="WebView">
+                    <style type="text/css">                        
+                        @font-face {
+                          font-family: "Source Sans Pro Regular";
+                          src: url('${platformSpecificFontPath}/SourceSansPro-Regular.ttf') format('truetype');
+                          font-weight: 500;
+                        }
+                        @font-face {
+                          font-family: "Source Sans Pro Regular Italic";
+                          src: url('${platformSpecificFontPath}/SourceSansPro-Italic.ttf') format('truetype');
+                          font-weight: 500;
+                          font-style: italic;
+                        }
+                        @font-face {
+                          font-family: "Source Sans Pro Bold";
+                          src: url('${platformSpecificFontPath}/SourceSansPro-Bold.ttf') format('truetype');
+                          font-weight: 700;
+                        }
+                        @font-face {
+                          font-family: "Source Sans Pro Light";
+                          src: url('${platformSpecificFontPath}/SourceSansPro-Light.ttf') format('truetype');
+                          font-weight: 300;
+                        }
                         * {
                           background-color: ${props.theme.colors.background};
                           color: ${props.theme.colors.text};
+                          font-family: 'Source Sans Pro Regular', 'sans-serif';
+                          font-weight: 500;                          
                         }                  
                         a {
                             color: ${props.theme.colors.accent} !important;
@@ -73,13 +99,14 @@ const getContent = (props) => {
                           display: flex;
                           flex-direction: column;
                         }
-               </style>`
+               </style></head>`
   // console.log('getContent', props.post.get('content'))
   const postImage = `
+    <body>
     <img src="${props.post.get('jetpack_featured_media_url')}" class="g4postimagemobile"> 
   `
   // console.log('Generated Content is ', props, htmlStyle + postImage + props.post.get('content'));
-  return htmlStyle + postImage + props.post.get('content')
+  return htmlStyle + postImage + props.post.get('content') + '</body>'
 }
 
 const getMessages = (message, param1) => {
@@ -106,9 +133,11 @@ class PostModal extends React.Component {
             <Appbar style={{marginTop: 40, height: 20, paddingTop: 30, alignSelf: 'flex-end', flex: 0.03, flexDirection: 'row'}}>
               <Appbar.Action style={{marginRight: 5, marginTop: -20}} icon="close" onPress={() => this.props.closePost()} />
             </Appbar>
-            <Title style={{marginLeft: '4%', marginRight: '4%', lineHeight: 20}}>{this.props.post ? this.props.post.get('title') : ''}</Title>
+            <Title style={Style.titleFont}>
+              {this.props.post ? this.props.post.get('title') : ''}
+            </Title>
             <WebView
-              style={{width: '100%', flex: 1, backgroundColor: this.props.theme.colors.background}}
+              style={[Style.contentFont, { backgroundColor: this.props.theme.colors.background }]}
               originWhitelist={['*']}
               // onLoad={getMessages}
               // onLoadStart={getMessages}
@@ -116,7 +145,7 @@ class PostModal extends React.Component {
               // onMessage={getMessages}
               // renderError={getMessages}
               // onError={(err)=> console.log('WebView err', err)}
-              source={{html: this.props.post ? getContent(this.props) : ''}}
+              source={{ html: this.props.post ? getContent(this.props) : '', baseUrl: 'https://www.google/com' }}
             />
           </View>
         </Modal>
