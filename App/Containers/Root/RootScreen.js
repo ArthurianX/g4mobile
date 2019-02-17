@@ -11,6 +11,8 @@ import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 import { GetSettingsSelector } from 'App/Stores/Settings/Selectors'
 import PostModal from 'App/Components/PostModal/PostModal'
 import Colors from 'App/Theme/Colors'
+import Notifications from '../../Components/NotificationSnack/Notifications'
+import { LocalNotificationsService } from '../../Services/LocalNotificationsService'
 
 /**
  * The root screen contains the application's navigation.
@@ -53,6 +55,14 @@ class RootScreen extends Component {
   componentDidMount() {
     // Run the startup saga when the application is starting
     this.props.startup()
+
+    setTimeout( () => {
+      LocalNotificationsService.addMessage('This is a test')
+    }, 7000 )
+
+    setTimeout( () => {
+      LocalNotificationsService.addMessage('This is another test')
+    }, 10000 )
   }
 
   render() {
@@ -71,6 +81,7 @@ class RootScreen extends Component {
           />
         </View>
         <PostModal />{/*TODO:REPLACE HTHIS*/}
+        <Notifications messages={LocalNotificationsService.queue} />
       </PaperProvider>
     )
   }

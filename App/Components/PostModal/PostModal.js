@@ -155,7 +155,8 @@ class PostModal extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  post: state.posts.get('openPost')
+  post: state.posts.get('openPost'),
+  // snack: state.posts.get('currentSnack'),
 })
 
 const mapDispatchToProps = (dispatch) => ({
