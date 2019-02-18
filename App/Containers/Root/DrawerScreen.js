@@ -9,6 +9,7 @@ import Images from '../../Theme/Images'
 import { Dimensions, Image } from 'react-native'
 import DrawerMenu from 'App/Components/DrawerMenu/DrawerMenu'
 import Fonts from 'App/Theme/Fonts'
+import SmallLogo from '../../Components/SmallLogo/SmallLogo'
 
 // drawer stack
 let { height, width } = Dimensions.get('window')
@@ -43,13 +44,7 @@ const DrawerScreen = createStackNavigator(
     navigationOptions: ({ navigation }) => ({
       headerStyle: { backgroundColor: 'white' },
       // title: 'Ultimele Articole',
-      headerTitle: (
-        <Image
-          style={{ height: 25, marginLeft: 20 }}
-          resizeMode={'contain'}
-          source={Images.g4logo}
-        />
-        ),
+      headerTitle: ( <SmallLogo /> ),
       headerLeft:
         <IconButton
           icon="menu"

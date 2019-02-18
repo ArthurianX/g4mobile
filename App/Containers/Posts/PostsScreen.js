@@ -35,10 +35,6 @@ const keyExtractor = (item, index) => {
   return item.id
 }
 
-const onRefresh = (id) => {
-  console.log('onPressItem', id)
-}
-
 const onViewableItemsChanged = (id) => {
   // console.log('onViewableItemsChanged', id)
 }
@@ -46,34 +42,27 @@ const onViewableItemsChanged = (id) => {
 class PostsScreen extends React.Component {
   componentDidMount() {
     this.props.fetchMorePosts()
-
   }
-
-  // componentDidUpdate(prevProps) {
-  //   console.log('PostsScreen', prevProps)
-  //   if (prevProps.isFocused !== this.props.isFocused) {
-  //     // Use the `this.props.isFocused` boolean
-  //     // Call any action
-  //   }
-  // }
 
   render() {
     const onPressItem = (post) => {
       this.props.openPost(post)
     }
+    const onRefresh = (id) => {
+      this.props.fetchPosts()
+    }
+
     posts = processPosts(this.props.posts)
     return (
       <View style={[Style.container, { flex: 1 }]}>
-        {this.props.postsIsLoading ? <LoadingActivity /> : <View />}
-
         {/* Commented FlatList Props, they don't work properly.
         onPressItem={onPressItem}
-        onRefresh={onRefresh}
-        refreshing={this.props.postsIsLoading}
         onViewableItemsChanged={onViewableItemsChanged}
         keyExtractor={keyExtractor} */}
         <FlatList
           data={posts}
+          onRefresh={onRefresh}
+          refreshing={this.props.postsIsLoading}
           onEndReachedThreshold={0.8}
           onEndReached={this.props.fetchMorePosts}
           style={{ backgroundColor: this.props.theme.colors.background, paddingTop: 20 }}
@@ -81,8 +70,6 @@ class PostsScreen extends React.Component {
         />
         {/* <Text style={Style.text}>{this.props.isHot ? "It's pretty hot!" : ''}</Text> */}
         <Text style={Style.text}>{this.props.postsErrorMessage}</Text>
-
-        {/*<Button onPress={this.props.fetchMorePosts} title="Mai multe" />*/}
       </View>
     )
   }

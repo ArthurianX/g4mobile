@@ -1,5 +1,6 @@
 import { put, call, select } from 'redux-saga/effects'
 import PostsActions from 'App/Stores/Posts/Actions'
+import SettingsActions from 'App/Stores/Settings/Actions'
 import { G4MediaService } from 'App/Services/g4MediaService'
 import { PostsApiParamsSelector, PostsSavedSelector } from 'App/Stores/Posts/Selectors'
 import { PostsMiddleware } from 'App/Services/PostsMiddlewareService'
@@ -16,8 +17,11 @@ export function* fetchPosts() {
   const newPosts = yield call(G4MediaService.getAllPosts, undefined, { per_page: 15, offset: 0 })
   const posts = PostsMiddleware.mergePostsWithStartupTrim(existingPosts, newPosts)
 
+  const notificationCount = PostsMiddleware.getNewCount(existingPosts, newPosts)
+
   if (posts) {
     yield put(PostsActions.fetchPostsSuccess(posts))
+    yield put(SettingsActions.pushNotification(notificationCount.length ? ` ${notificationCount} ARTICOLE NOI` : 'NU SUNT ARTICOLE NOI'))
   } else {
     yield put(
       PostsActions.fetchPostsFailure('There was an error while fetching the latest posts.')

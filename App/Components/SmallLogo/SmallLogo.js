@@ -1,52 +1,26 @@
 import React from 'react'
-import { View, Easing, Animated, Image } from 'react-native'
-import Animations from 'App/Theme/Animations'
-import LottieView from 'lottie-react-native'
-import Images from '../../Theme/Images'
+import { View, Image } from 'react-native'
+import { connect } from 'react-redux'
+import LoadingActivity from 'App/Components/LoadingActivity/LoadingActivity'
+import Images from 'App/Theme/Images'
 
-// <LottieView
-//
-// resizeMode={'center'}
-// source={Animations.themeSwitcher}
-//
-// />
-
-let animationProgress = new Animated.Value(0)
-
-const animateToEnd = () => {
-  Animated.timing(animationProgress, {
-    toValue: 0.1,
-    duration: 10,
-    easing: Easing.none,
-  }).start()
-}
- // animateToEnd()
-
-//
-// setInterval( () => {
-//   Animated.timing(animationProgress, {
-//     toValue: 0.1,
-//     duration: 10,
-//     easing: Easing.none,
-//   }).start( () => animateToEnd() )
-// }, 5000)
-
-export default class SmallLogo extends React.Component {
-  // render() {
-  //   Animated.timing(animationProgress, {
-  //     toValue: 0.1,
-  //     duration: 2500,
-  //     easing: Easing.none,
-  //   }).start()
-  //   return (
-  //     <LottieView
-  //       style={{height: 80, marginTop: -5}}
-  //       progress={animationProgress}
-  //       source={Animations.smallLogo}
-  //       resizeMode={'contain'} />
-  //   )
-  // }
+class SmallLogo extends React.Component {
   render() {
-    return (<Image style={{height: 70, marginTop: -5}} resizeMode={'contain'} source={Images.g4logo} />)
+    return (
+      <View>
+        <Image
+          style={{ height: 25, marginLeft: 20, zIndex: 2 }}
+          resizeMode={'contain'}
+          source={Images.g4logo}
+        />
+        {this.props.postsIsLoading ? <LoadingActivity /> : <View />}
+      </View>
+    )
   }
 }
+
+const mapStateToProps = (state) => ({
+  postsIsLoading: state.posts.get('postsIsLoading'),
+})
+
+export default connect(mapStateToProps)(SmallLogo)

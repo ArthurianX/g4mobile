@@ -1,5 +1,5 @@
 import React from 'react'
-import { Linking, Platform, Share } from 'react-native'
+import { Linking, View, Share } from 'react-native'
 import { Card, Text, IconButton } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/EvilIcons'
 import PropTypes from 'prop-types'
@@ -76,6 +76,9 @@ class PostsCards extends React.Component {
             size={25}
             onPress={() => console.log('Pressed', this.props.post)}
           /> */}
+          {/*<View style={{flex: 1, justifyContent: 'flex-start'}}>
+            <Text>{this.props.post.date}</Text>
+          </View>*/}
           <IconButton
             icon={shareIcon}
             color={'#7f7f7f'}
