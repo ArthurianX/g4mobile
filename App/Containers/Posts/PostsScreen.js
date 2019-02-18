@@ -4,6 +4,7 @@ import { withTheme } from 'react-native-paper'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import PostsActions from 'App/Stores/Posts/Actions'
+import SettingsAction from 'App/Stores/Settings/Actions'
 import PostsCards from 'App/Components/PostsCards/PostsCards'
 import LoadingActivity from 'App/Components/LoadingActivity/LoadingActivity'
 import Style from './PostsScreenStyle'
@@ -15,7 +16,14 @@ const processPosts = (items) => {
     let numberOfPosts = 0
     items.map((ele) => {
       numberOfPosts += 1
-      result.push({id: ele.get('id'), title: ele.get('title'), image: ele.get('jetpack_featured_media_url')})
+      result.push({
+        id: ele.get('id'),
+        title: ele.get('title'),
+        date: ele.get('date'),
+        link: ele.get('link'),
+        excerpt: ele.get('excerpt'),
+        image: ele.get('jetpack_featured_media_url'),
+      })
     })
     // console.log('PostsScreen => Processing Posts #', numberOfPosts)
   }
@@ -69,7 +77,7 @@ class PostsScreen extends React.Component {
           onEndReachedThreshold={0.8}
           onEndReached={this.props.fetchMorePosts}
           style={{ backgroundColor: this.props.theme.colors.background, paddingTop: 20 }}
-          renderItem={({ item }) => <TouchableOpacity onPress={onPressItem.bind(this, item)}><PostsCards post={item} /></TouchableOpacity>}
+          renderItem={({ item }) => <TouchableOpacity onPress={onPressItem.bind(this, item)}><PostsCards post={item} notificationCallback={this.props.createSnackbar} /></TouchableOpacity>}
         />
         {/* <Text style={Style.text}>{this.props.isHot ? "It's pretty hot!" : ''}</Text> */}
         <Text style={Style.text}>{this.props.postsErrorMessage}</Text>
@@ -99,6 +107,7 @@ const mapDispatchToProps = (dispatch) => ({
   openPost: (post) => {
     dispatch(PostsActions.openPost(post))
   },
+  createSnackbar: (message) => dispatch(SettingsAction.pushNotification(message)),
 })
 
 export default connect(

@@ -50,7 +50,7 @@ function processResponse(payload, type) {
   let result = []
 
   if (type === 'post' && typeof payload === 'object' && payload.length) {
-    const pickAttrs = ['id', 'author', 'categories', 'content', 'date', 'excerpt', 'jetpack_featured_media_url', 'title'];
+    const pickAttrs = ['id', 'author', 'link', 'categories', 'content', 'date', 'excerpt', 'jetpack_featured_media_url', 'title'];
     payload.map((ele) => result.push(pick(ele, pickAttrs)))
   }
 

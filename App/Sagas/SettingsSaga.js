@@ -24,7 +24,9 @@ export function* changeNotificationStatus() {
 }
 
 export function* globalReset() {
-
   // Do a Redux Store Reset Here.
+}
 
+export function* pushNotification(payload) {
+  yield put(SettingsActions.setNotification(payload.message))
 }

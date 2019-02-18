@@ -1,14 +1,22 @@
 import React from 'react'
 import { Linking, Platform, Share } from 'react-native'
 import { Card, Text, IconButton } from 'react-native-paper'
+import Icon from 'react-native-vector-icons/EvilIcons'
 import PropTypes from 'prop-types'
 import Styles from './PostsCardsStyles'
+import { CleanMarkupService } from 'App/Services/CleanMarkupService'
+import Snackbar from 'react-native-snackbar';
 
-const shareArticle = () => {
+let shareIcon = {}
+let externalIcon = {}
+const shareArticle = (post, cbck) => {
+
   const content = {
-    url: 'asdasdasda',
-    message: 'asdjskjdsakjdh sjakdfh sjkdfhjsadhfjsd',
-    title: 'jsdkjsadjfkhsjdfhsd',
+    url: post.link,
+    message: CleanMarkupService.getPlain(post.excerpt),
+    title: post.title,
+    dialogTitle: post.title,
+    subject: post.title,
   }
 
   const failureCallback = (param) => {
@@ -17,18 +25,40 @@ const shareArticle = () => {
   const successCallback = (param) => {
     console.log('successCallback', param)
   }
-  console.log('Share', Share)
+
+  console.log('Share Content', content)
   Share.share(content).then((param) => {
-    console.log('Param', param)
+    // Use this to dispatch a Redux / Saga to send a notification
+    // cbck(param.action)
+
+    // OR use this to just create a snackbar
+    if (param.action !== 'dismissedAction') {
+      Snackbar.show({
+        title: 'Articol distribuit',
+      })
+    }
   })
 }
 
-const openArticle = () => {
-  console.log('Linking', Linking);
-  Linking.openURL('https://www.g4media.ro/surse-cea-mai-mare-problema-in-pnl-cine-va-deschide-lista-pentru-europarlamentare-liberalii-amana-discutia-listei-inca-doua-saptamani.html').catch((err) => console.error('An error occurred', err));
+const openArticle = (link) => {
+  Linking.openURL(link).catch((err) => {
+    console.error('An error occurred', err)
+    // TODO: Snackbar ?
+  })
 }
 
 class PostsCards extends React.Component {
+  componentDidMount() {
+    Icon.getImageSource('share-apple', 25, '#7f7f7f').then((source) =>
+      shareIcon = source
+    )
+
+    Icon.getImageSource('external-link', 25, '#7f7f7f').then((source) =>
+      externalIcon = source
+    )
+
+
+  }
   render() {
     return (
       <Card
@@ -40,28 +70,25 @@ class PostsCards extends React.Component {
           {this.props.post.title}
         </Text>
         <Card.Actions style={Styles.actions}>
-          <IconButton
+          {/* <IconButton
             icon="bookmark-border"
             color={'#7f7f7f'}
             size={25}
             onPress={() => console.log('Pressed', this.props.post)}
+          /> */}
+          <IconButton
+            icon={shareIcon}
+            color={'#7f7f7f'}
+            size={35}
+            onPress={() => shareArticle(this.props.post, this.props.notificationCallback)}
           />
           <IconButton
-            icon="launch"
+            icon={externalIcon}
             color={'#7f7f7f'}
-            size={25}
-            onPress={() => openArticle()}
+            size={35}
+            style={{ marginBottom: 1 }}
+            onPress={() => openArticle(this.props.post.link)}
           />
-          <IconButton
-            icon="share"
-            color={'#7f7f7f'}
-            size={25}
-            onPress={() => {
-              console.log('Pressed')
-              shareArticle()
-            }}
-          />
-
         </Card.Actions>
       </Card>
     )
@@ -70,6 +97,7 @@ class PostsCards extends React.Component {
 
 PostsCards.propTypes = {
   post: PropTypes.object,
+  notificationCallback: PropTypes.func,
 }
 
 export default PostsCards
