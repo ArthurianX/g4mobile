@@ -9,14 +9,17 @@ import Images from '../../Theme/Images'
 import { Dimensions, Image } from 'react-native'
 import DrawerMenu from 'App/Components/DrawerMenu/DrawerMenu'
 import Fonts from 'App/Theme/Fonts'
+import SmallLogo from '../../Components/SmallLogo/SmallLogo'
+import AboutUs from '../AboutUs/AboutUs'
+import ContactScreen from '../Contact/ContactScreen'
 
 // drawer stack
 let { height, width } = Dimensions.get('window')
 const DrawerStack = createDrawerNavigator(
   {
     Acasa: { screen: PostsScreen },
-    'Despre noi': { screen: FilteredPostsScreen },
-    Contact: { screen: SettingsScreen },
+    'Despre noi': { screen: AboutUs },
+    Contact: { screen: ContactScreen },
     Feedback: { screen: FeedbackScreen },
   },
   {
@@ -27,7 +30,8 @@ const DrawerStack = createDrawerNavigator(
       labelStyle: {
         ...Fonts.family.normal,
         fontSize: 18,
-        lineHeight: 18,
+        fontWeight: '500',
+        lineHeight: 0,
         textTransform: 'uppercase',
       },
     },
@@ -40,24 +44,21 @@ const DrawerScreen = createStackNavigator(
   },
   {
     headerMode: 'float',
-    navigationOptions: ({ navigation }) => ({
-      headerStyle: { backgroundColor: 'white' },
-      // title: 'Ultimele Articole',
-      headerTitle: (
-        <Image
-          style={{ height: 25, marginLeft: 20 }}
-          resizeMode={'contain'}
-          source={Images.g4logo}
-        />
-        ),
-      headerLeft:
+    navigationOptions: ({ navigation }) => {
+      console.log('navigationOptions', navigation)
+      return {
+        headerStyle: { backgroundColor: 'white' },
+        // title: 'Ultimele Articole',
+        headerTitle: ( <SmallLogo /> ),
+          headerLeft:
         <IconButton
-          icon="menu"
+          icon={navigation.state.isDrawerOpen ? 'close' : 'menu'}
           size={25}
           color={'black'}
           onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />,
-      // headerLeft: <Text onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>Menu</Text>,
-    }),
+        // headerLeft: <Text onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>Menu</Text>,
+      }
+    },
   }
 )
 

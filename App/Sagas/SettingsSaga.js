@@ -1,5 +1,6 @@
 import { put } from 'redux-saga/effects'
 import SettingsActions from 'App/Stores/Settings/Actions'
+import Snackbar from 'react-native-snackbar'
 
 // import { PostsApiParamsSelector } from '../Stores/Posts/Selectors';
 
@@ -24,7 +25,16 @@ export function* changeNotificationStatus() {
 }
 
 export function* globalReset() {
-
   // Do a Redux Store Reset Here.
+}
 
+export function* pushNotification(payload) {
+  setTimeout(() => {
+    Snackbar.show({
+      title: 'Ultimele articole de pe G4Media.ro',
+      // title: payload.message, TODO: Message is crappy, fix this.
+      duration: Snackbar.LENGTH_SHORT,
+    })
+  })
+  yield put(SettingsActions.setNotification(payload.message))
 }

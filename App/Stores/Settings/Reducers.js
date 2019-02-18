@@ -27,10 +27,22 @@ export const settingsNotificationStatus = (state) =>
     notification: state.get('notification') ? 0 : 1,
   })
 
+export const setNotification = (state, { currentNotification }) =>
+  state.merge({
+    currentNotification: currentNotification,
+  })
+
+export const clearNotification = (state) =>
+  state.merge({
+    currentNotification: '',
+  })
+
 export const reducer = createReducer(INITIAL_STATE, {
   [SettingsTypes.CHANGE_THEME]: settingsChangeTheme,
   [SettingsTypes.CHANGE_CATEGORY_VISIBILITY]: settingsCategoryVisibility,
   [SettingsTypes.CHANGE_DATE_VISIBILITY]: settingsDateVisibility,
   [SettingsTypes.CHANGE_AUTHOR_VISIBILITY]: settingsAuthorVisibility,
   [SettingsTypes.CHANGE_NOTIFICATION_STATUS]: settingsNotificationStatus,
+  [SettingsTypes.SET_NOTIFICATION]: setNotification,
+  [SettingsTypes.CLEAR_NOTIFICATION]: clearNotification,
 })

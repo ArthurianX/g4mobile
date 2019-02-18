@@ -1,7 +1,9 @@
 import { takeLatest, all } from 'redux-saga/effects'
 import { StartupTypes } from 'App/Stores/Startup/Actions'
 import { PostsTypes } from 'App/Stores/Posts/Actions'
+import { SettingsTypes } from 'App/Stores/Settings/Actions'
 import { fetchPosts, fetchMorePosts, closePost, openPost } from './PostsSaga'
+import { pushNotification } from './SettingsSaga'
 import { startup } from './StartupSaga'
 
 export default function* root() {
@@ -15,5 +17,6 @@ export default function* root() {
     takeLatest(PostsTypes.FETCH_MORE_POSTS, fetchMorePosts),
     takeLatest(PostsTypes.CLOSE_POST, closePost),
     takeLatest(PostsTypes.OPEN_POST, openPost),
+    takeLatest(SettingsTypes.PUSH_NOTIFICATION, pushNotification),
   ])
 }

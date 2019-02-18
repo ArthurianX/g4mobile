@@ -1,6 +1,8 @@
 import sortedUniqBy from 'lodash-es/sortedUniqBy'
+import sortBy from 'lodash-es/sortBy'
 import uniqBy from 'lodash-es/uniqBy'
 import findIndex from 'lodash-es/findIndex'
+import { difference } from 'lodash-es'
 
 function loggingExtractIds(arr, context) {
   let res = ''
@@ -33,6 +35,10 @@ function sortById(arr) {
   return sortedUniqBy(arr, (ele) => ele.id)
 }
 
+function sortByTime(arr) {
+  return sortBy(arr, (ele) => (new Date(ele.date).getTime() / 1000 | 0)).reverse()
+}
+
 /* Merge Posts as the user loads them, limit is 500 */
 function mergePosts(present, incoming) {
   const actual = convertPresent(present)
@@ -51,12 +57,13 @@ function mergePosts(present, incoming) {
   
   return collection
 }
+
 /* Merge Initial Posts on load - Cut the lot of them, leave only 30 news + whatever comes new. */
 function mergePostsWithStartupTrim(present, incoming) {
   const actual = convertPresent(present)
 
   let collection = incoming && incoming.length ? removeDuplicates(actual.concat(incoming)) : removeDuplicates(actual)
-  collection = sortById(collection)
+  collection = sortByTime(collection)
   collection = limitNumber(collection, 30)
 
   // console.log('mergePostsWithStartupTrim INPUT: ')
@@ -74,9 +81,19 @@ function getSpecificPost(id, posts) {
   return processedPosts[findIndex(processedPosts, { id: id })]
 }
 
+function getNewCount(existing, actual) {
+  const processedPosts = convertPresent(existing)
+  let existingIndexes = []
+  let actualIndexes = []
+  actual.map((ele) => existingIndexes.push(ele.id))
+  processedPosts.map((ele) => actualIndexes.push(ele.id))
+  return difference(existingIndexes, actualIndexes).length
+}
+
 export const PostsMiddleware = {
   mergePosts,
   mergePostsWithStartupTrim,
   getSpecificPost,
   mergeAndFilter,
+  getNewCount,
 }

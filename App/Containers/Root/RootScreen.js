@@ -78,6 +78,7 @@ class RootScreen extends Component {
 
 const mapStateToProps = (state) => ({
   settings: GetSettingsSelector(state),
+  notification: state.settings.get('currentNotification'),
 })
 
 const mapDispatchToProps = (dispatch) => ({

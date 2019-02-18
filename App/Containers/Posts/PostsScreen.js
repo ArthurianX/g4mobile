@@ -4,6 +4,7 @@ import { withTheme } from 'react-native-paper'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import PostsActions from 'App/Stores/Posts/Actions'
+import SettingsAction from 'App/Stores/Settings/Actions'
 import PostsCards from 'App/Components/PostsCards/PostsCards'
 import LoadingActivity from 'App/Components/LoadingActivity/LoadingActivity'
 import Style from './PostsScreenStyle'
@@ -15,7 +16,14 @@ const processPosts = (items) => {
     let numberOfPosts = 0
     items.map((ele) => {
       numberOfPosts += 1
-      result.push({id: ele.get('id'), title: ele.get('title'), image: ele.get('jetpack_featured_media_url')})
+      result.push({
+        id: ele.get('id'),
+        title: ele.get('title'),
+        date: ele.get('date'),
+        link: ele.get('link'),
+        excerpt: ele.get('excerpt'),
+        image: ele.get('jetpack_featured_media_url'),
+      })
     })
     // console.log('PostsScreen => Processing Posts #', numberOfPosts)
   }
@@ -27,10 +35,6 @@ const keyExtractor = (item, index) => {
   return item.id
 }
 
-const onRefresh = (id) => {
-  console.log('onPressItem', id)
-}
-
 const onViewableItemsChanged = (id) => {
   // console.log('onViewableItemsChanged', id)
 }
@@ -38,43 +42,34 @@ const onViewableItemsChanged = (id) => {
 class PostsScreen extends React.Component {
   componentDidMount() {
     this.props.fetchMorePosts()
-
   }
-
-  // componentDidUpdate(prevProps) {
-  //   console.log('PostsScreen', prevProps)
-  //   if (prevProps.isFocused !== this.props.isFocused) {
-  //     // Use the `this.props.isFocused` boolean
-  //     // Call any action
-  //   }
-  // }
 
   render() {
     const onPressItem = (post) => {
       this.props.openPost(post)
     }
+    const onRefresh = (id) => {
+      this.props.fetchPosts()
+    }
+
     posts = processPosts(this.props.posts)
     return (
       <View style={[Style.container, { flex: 1 }]}>
-        {this.props.postsIsLoading ? <LoadingActivity /> : <View />}
-
         {/* Commented FlatList Props, they don't work properly.
         onPressItem={onPressItem}
-        onRefresh={onRefresh}
-        refreshing={this.props.postsIsLoading}
         onViewableItemsChanged={onViewableItemsChanged}
         keyExtractor={keyExtractor} */}
         <FlatList
           data={posts}
+          onRefresh={onRefresh}
+          refreshing={this.props.postsIsLoading}
           onEndReachedThreshold={0.8}
           onEndReached={this.props.fetchMorePosts}
           style={{ backgroundColor: this.props.theme.colors.background, paddingTop: 20 }}
-          renderItem={({ item }) => <TouchableOpacity onPress={onPressItem.bind(this, item)}><PostsCards post={item} /></TouchableOpacity>}
+          renderItem={({ item }) => <TouchableOpacity onPress={onPressItem.bind(this, item)}><PostsCards post={item} notificationCallback={this.props.createSnackbar} /></TouchableOpacity>}
         />
         {/* <Text style={Style.text}>{this.props.isHot ? "It's pretty hot!" : ''}</Text> */}
         <Text style={Style.text}>{this.props.postsErrorMessage}</Text>
-
-        {/*<Button onPress={this.props.fetchMorePosts} title="Mai multe" />*/}
       </View>
     )
   }
@@ -99,6 +94,7 @@ const mapDispatchToProps = (dispatch) => ({
   openPost: (post) => {
     dispatch(PostsActions.openPost(post))
   },
+  createSnackbar: (message) => dispatch(SettingsAction.pushNotification(message)),
 })
 
 export default connect(
