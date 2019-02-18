@@ -85,13 +85,13 @@ class PostsCards extends React.Component {
             size={35}
             onPress={() => shareArticle(this.props.post, this.props.notificationCallback)}
           />
-          <IconButton
+          { this.props.post.link ? <IconButton
             icon={externalIcon}
             color={'#7f7f7f'}
             size={35}
             style={{ marginBottom: 1 }}
             onPress={() => openArticle(this.props.post.link)}
-          />
+          /> : <View />}
         </Card.Actions>
       </Card>
     )
