@@ -26,8 +26,9 @@ const DrawerStack = createDrawerNavigator(
     contentOptions: {
       inactiveTintColor: '#fff',
       labelStyle: {
-        ...Fonts.family.normal,
-        fontSize: 18,
+        ...Fonts.family.light,
+        fontSize: 16,
+        fontWeight: '100',
         lineHeight: 18,
         textTransform: 'uppercase',
       },
@@ -41,18 +42,21 @@ const DrawerScreen = createStackNavigator(
   },
   {
     headerMode: 'float',
-    navigationOptions: ({ navigation }) => ({
-      headerStyle: { backgroundColor: 'white' },
-      // title: 'Ultimele Articole',
-      headerTitle: ( <SmallLogo /> ),
-      headerLeft:
+    navigationOptions: ({ navigation }) => {
+      console.log('navigationOptions', navigation)
+      return {
+        headerStyle: { backgroundColor: 'white' },
+        // title: 'Ultimele Articole',
+        headerTitle: ( <SmallLogo /> ),
+          headerLeft:
         <IconButton
-          icon="menu"
+          icon={navigation.state.isDrawerOpen ? 'close' : 'menu'}
           size={25}
           color={'black'}
           onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />,
-      // headerLeft: <Text onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>Menu</Text>,
-    }),
+        // headerLeft: <Text onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>Menu</Text>,
+      }
+    },
   }
 )
 

@@ -3,9 +3,9 @@ import Fonts from '../../Theme/Fonts'
 
 export default StyleSheet.create({
   drawerItems: {
-    ...Fonts.family.bold,
-    fontSize: 24,
-    lineHeight: 28,
+    ...Fonts.family.regulae,
+    fontSize: 16,
+    lineHeight: 20,
     textTransform: 'uppercase',
   },
   container: {
