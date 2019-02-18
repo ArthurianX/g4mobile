@@ -7,6 +7,10 @@ export default StyleSheet.create({
     fontSize: 16,
     lineHeight: 20,
     textTransform: 'uppercase',
+    marginTop: 4,
+    marginBottom: 4,
+    paddingTop: 4,
+    paddingBottom: 4,
   },
   container: {
     flex: 1,

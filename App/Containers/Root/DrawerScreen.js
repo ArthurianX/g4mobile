@@ -10,14 +10,16 @@ import { Dimensions, Image } from 'react-native'
 import DrawerMenu from 'App/Components/DrawerMenu/DrawerMenu'
 import Fonts from 'App/Theme/Fonts'
 import SmallLogo from '../../Components/SmallLogo/SmallLogo'
+import AboutUs from '../AboutUs/AboutUs'
+import ContactScreen from '../Contact/ContactScreen'
 
 // drawer stack
 let { height, width } = Dimensions.get('window')
 const DrawerStack = createDrawerNavigator(
   {
     Acasa: { screen: PostsScreen },
-    'Despre noi': { screen: FilteredPostsScreen },
-    Contact: { screen: SettingsScreen },
+    'Despre noi': { screen: AboutUs },
+    Contact: { screen: ContactScreen },
     Feedback: { screen: FeedbackScreen },
   },
   {
@@ -26,10 +28,10 @@ const DrawerStack = createDrawerNavigator(
     contentOptions: {
       inactiveTintColor: '#fff',
       labelStyle: {
-        ...Fonts.family.light,
-        fontSize: 16,
-        fontWeight: '100',
-        lineHeight: 18,
+        ...Fonts.family.normal,
+        fontSize: 18,
+        fontWeight: '500',
+        lineHeight: 0,
         textTransform: 'uppercase',
       },
     },

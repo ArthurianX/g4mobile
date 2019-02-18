@@ -31,7 +31,8 @@ export function* globalReset() {
 export function* pushNotification(payload) {
   setTimeout(() => {
     Snackbar.show({
-      title: payload.message,
+      title: 'Ultimele articole de pe G4Media.ro',
+      // title: payload.message, TODO: Message is crappy, fix this.
       duration: Snackbar.LENGTH_SHORT,
     })
   })
