@@ -9,11 +9,9 @@ export default StyleSheet.create({
   },
   loadingActivityHorizontal: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    padding: 10,
-    marginLeft: -80,
-    marginTop: 3,
+    justifyContent: 'center',
   },
+  logoStyles: { padding: 10, marginLeft: -80, marginTop: 3 },
   lottieContainer: {
     transform: [
       { scaleX: 0.4 },

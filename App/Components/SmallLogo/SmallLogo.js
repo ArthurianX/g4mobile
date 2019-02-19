@@ -14,7 +14,7 @@ class SmallLogo extends React.Component {
           resizeMode={'contain'}
           source={this.props.theme === 'dark' ? Images.g4logowhite : Images.g4logo}
         />
-        {this.props.postsIsLoading ? <LoadingActivity /> : <View />}
+        {this.props.postsIsLoading ? <LoadingActivity logoplace={true} visible={true} /> : <View />}
       </View>
     )
   }

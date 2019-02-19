@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, Text, Share } from 'react-native'
-import { Appbar, IconButton, Title, withTheme } from 'react-native-paper'
+import { View, Share, ActivityIndicator } from 'react-native'
+import { Title, withTheme } from 'react-native-paper'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import Style from './PostsScreenStyle'
@@ -59,16 +59,15 @@ const shareArticle = (post) => {
 }
 
 const getContent = (post, theme) => {
+  /* Generate the styles */
   let htmlStyle = '<head title="WebView">'
   htmlStyle += WebViewStyles.generateStyle(theme)
-  htmlStyle += '</head>'
+  htmlStyle += '</head><body>'
 
-  console.log('getContent', post, theme)
-  const postImage = `
-    <body>
-    <img src="${post.get('jetpack_featured_media_url')}" class="g4postimagemobile"> 
-  `
-  return htmlStyle + postImage + post.get('content') + '</body>'
+  const title = `<h1>${post.get('title')}</h1>`
+
+  const postImage = `<img src="${post.get('jetpack_featured_media_url')}" class="g4postimagemobile">`
+  return htmlStyle + title + postImage + post.get('content') + '</body>'
 }
 
 class PostScreen extends React.Component {
@@ -76,23 +75,20 @@ class PostScreen extends React.Component {
     this.props.openPost(this.props.navigation.state.params.postId)
   }
   render() {
-    console.log('this.propsthis.propsthis.props', this.props)
     return (
       <View style={[Style.container, { backgroundColor: this.props.theme.colors.background }]}>
-        <Title style={Style.titleFont}>{this.props.post ? this.props.post.get('title') : ''}</Title>
         { this.props.post ? populateCurrentPost(this.props.post) : <View />}
         <WebView
-          style={[Style.contentFont, { backgroundColor: this.props.theme.colors.background }]}
+          style={{ backgroundColor: this.props.theme.colors.background}}
           originWhitelist={['*']}
           // onLoad={getMessages}
-          // onLoadStart={getMessages}
-          // onLoadEnd={getMessages}
+          // onLoadStart={() => switchLoadingState(true)}
+          // onLoadEnd={() => switchLoadingState(false)}
           // onMessage={getMessages}
           // renderError={getMessages}
           // onError={(err)=> console.log('WebView err', err)}
           source={{
             html: this.props.post ? getContent(this.props.post, this.props.theme) : '',
-            baseUrl: 'https://www.google/com',
           }}
         />
       </View>

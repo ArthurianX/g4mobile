@@ -17,7 +17,7 @@ const generateStyle = (theme) => {
           font-weight: 500;                          
         }                  
         a {
-            font-size: 2rem;
+            font-size: 3rem;
             color: ${theme.colors.accent} !important;
         }      
         .g4postimagemobile {
@@ -29,39 +29,48 @@ const generateStyle = (theme) => {
         body {
           width:100%;
         }
-        h2 {
+        h1 {
           font-size: 48px;
+          font-weight: bold;
+          margin-left: 4%; 
+          margin-right: 4%;
         }
-        p {
+        h2 {
+          font-size: 40px;
+          font-weight: bold;
+        }
+        p, div {
           font-size: 3rem;
           margin-left: 4%; 
           margin-right: 4%; 
         }
         h3 {
-          font-size: 32px
+          font-size: 32px;
+          font-weight: bold;
         }
         img {
-          width:98%;
+          width:100%;
         }
         td {
           display: block !important;
-          width: 95% !important;
+          width: 100% !important;
         }
         img {
-          width:98%;
+          width:100%;
         }
         hr {
-          width: 98%;
+          width: 100%;
         }
         ol li ol li ol li {
-          position: relative; right: 85px;
+          position: relative; right: 85px;          
         }
         ul {
-          width: 98%;
+          width: 100%;
           margin-left: -25px;
         }
         li {
-          width: 98%;
+          width: 100%;
+          font-size: 3rem;
         }
         .tabs {
           display: none;
@@ -76,6 +85,9 @@ const generateStyle = (theme) => {
         tr {
           display: flex;
           flex-direction: column;
+        }
+        em {
+        font-weight: 200;
         }
     </style>`
 }

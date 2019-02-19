@@ -26,7 +26,7 @@ export default StyleSheet.create({
   },
   loadingActivityHorizontal: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     padding: 10,
   },
 })

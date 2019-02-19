@@ -1,97 +1,15 @@
 import React, { Component } from 'react'
-import { createDrawerNavigator, createStackNavigator, DrawerActions } from 'react-navigation'
-import NavigationService from 'App/Services/NavigationService'
-import { Dimensions, StatusBar, View, Text } from 'react-native'
-import styles from './RootScreenStyle'
 import { connect } from 'react-redux'
+import { StatusBar, View } from 'react-native'
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
+import styles from './RootScreenStyle'
+import NavigationService from 'App/Services/NavigationService'
+import NavigationStack from './NavigationStack'
 import StartupActions from 'App/Stores/Startup/Actions'
 import SettingsActions from 'App/Stores/Settings/Actions'
-import { DefaultTheme, Button, IconButton, Provider as PaperProvider } from 'react-native-paper'
 import { GetSettingsSelector } from 'App/Stores/Settings/Selectors'
-import PostModal from 'App/Components/PostModal/PostModal'
 import Colors from 'App/Theme/Colors'
 import VersionNumber from 'react-native-version-number'
-import PostsScreen from 'App/Containers/Posts/PostsScreen'
-import AboutUs from 'App/Containers/AboutUs/AboutUs'
-import ContactScreen from 'App/Containers/Contact/ContactScreen'
-import FeedbackScreen from 'App/Containers/Feedback/FeedbackScreen'
-import DrawerMenu from 'App/Components/DrawerMenu/DrawerMenu'
-import Fonts from 'App/Theme/Fonts'
-import SmallLogo from 'App/Components/SmallLogo/SmallLogo'
-import PostScreen from 'App/Containers/Posts/PostScreen'
-
-let { height, width } = Dimensions.get('window')
-
-const headerSettings = {
-  headerMode: 'float',
-  navigationOptions: ({ navigation }) => {
-    return {
-      headerStyle: { backgroundColor: 'white' },
-      headerTitle: <SmallLogo />,
-      headerLeft: (
-        <IconButton
-          icon={navigation.state.isDrawerOpen ? 'close' : 'menu'}
-          size={25}
-          color={'#15202A'}
-          onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-        />
-      ),
-    }
-  },
-}
-/* Navigation Stacks to have headers */
-const PostsStack = createStackNavigator(
-  {
-    PostsHome: PostsScreen,
-    SinglePost: {
-      screen: PostScreen,
-      navigationOptions: ({ navigation }) => {
-        return {
-          headerStyle: { backgroundColor: 'white' },
-          headerTitle: <SmallLogo />,
-          headerLeft: (
-            <IconButton
-              icon="keyboard-backspace"
-              size={25}
-              color={'#15202A'}
-              onPress={() => navigation.goBack()}
-            />
-          ),
-        }
-      },
-    },
-  },
-  { ...headerSettings }
-)
-const AboutStack = createStackNavigator({ AboutHome: AboutUs }, { ...headerSettings })
-const ContactStack = createStackNavigator({ ContactHome: ContactScreen }, { ...headerSettings })
-const FeedbackStack = createStackNavigator({ FeedbackHome: FeedbackScreen }, { ...headerSettings })
-
-const DrawerStack = createDrawerNavigator(
-  {
-    Acasa: PostsStack,
-    'Despre noi': AboutStack,
-    Contact: ContactStack,
-    Feedback: FeedbackStack,
-  },
-  {
-    navigationOptions: () => ({
-      gesturesEnabled: false,
-    }),
-    contentComponent: DrawerMenu,
-    drawerWidth: width,
-    contentOptions: {
-      inactiveTintColor: '#fff',
-      labelStyle: {
-        ...Fonts.family.normal,
-        fontSize: 18,
-        fontWeight: '500',
-        lineHeight: 0,
-        textTransform: 'uppercase',
-      },
-    },
-  }
-)
 
 const lightTheme = {
   ...DefaultTheme,
@@ -117,7 +35,8 @@ class RootScreen extends Component {
   componentDidMount() {
     // Run the startup saga when the application is starting
     this.props.checkAppVersion()
-    this.props.startup()
+    // Give checkAppVersion 700ms to check vers and clear storage if necessary
+    setTimeout(() => this.props.startup(), 700)
   }
 
   render() {
@@ -128,7 +47,7 @@ class RootScreen extends Component {
           barStyle={this.props.settings.get('theme') ? 'light-content': 'dark-content'}
         />
         <View style={styles.container}>
-          <DrawerStack
+          <NavigationStack
             // Initialize the NavigationService (see https://reactnavigation.org/docs/en/navigating-without-navigation-prop.html)
             ref={(navigatorRef) => {
               // DEV - Force Open Drawer
