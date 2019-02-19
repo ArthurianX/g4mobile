@@ -6,11 +6,13 @@ import styles from './RootScreenStyle'
 import SplashScreen from 'App/Containers/SplashScreen/SplashScreen'
 import { connect } from 'react-redux'
 import StartupActions from 'App/Stores/Startup/Actions'
+import SettingsActions from 'App/Stores/Settings/Actions'
 import DrawerScreen from './DrawerScreen'
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 import { GetSettingsSelector } from 'App/Stores/Settings/Selectors'
 import PostModal from 'App/Components/PostModal/PostModal'
 import Colors from 'App/Theme/Colors'
+import VersionNumber from 'react-native-version-number'
 
 /**
  * The root screen contains the application's navigation.
@@ -52,6 +54,7 @@ const darkTheme = {
 class RootScreen extends Component {
   componentDidMount() {
     // Run the startup saga when the application is starting
+    this.props.checkAppVersion()
     this.props.startup()
   }
 
@@ -83,6 +86,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   startup: () => dispatch(StartupActions.startup()),
+  checkAppVersion: () => dispatch(SettingsActions.checkAppVersion(VersionNumber)),
 })
 
 export default connect(

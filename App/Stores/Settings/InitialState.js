@@ -7,4 +7,5 @@ export const INITIAL_STATE = Map({
   show_author: 0,
   notifications: 0,
   currentNotification: '',
+  appVersion: 0,
 })

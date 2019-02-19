@@ -3,6 +3,7 @@ package com.karthurk.g4mobile;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.apsl.versionnumber.RNVersionNumberPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import com.azendoo.reactnativesnackbar.SnackbarPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
@@ -27,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNVersionNumberPackage(),
             new LottiePackage(),
             new SnackbarPackage(),
             new RNCWebViewPackage(),

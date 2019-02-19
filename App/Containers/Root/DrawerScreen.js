@@ -45,18 +45,17 @@ const DrawerScreen = createStackNavigator(
   {
     headerMode: 'float',
     navigationOptions: ({ navigation }) => {
-      console.log('navigationOptions', navigation)
       return {
         headerStyle: { backgroundColor: 'white' },
-        // title: 'Ultimele Articole',
-        headerTitle: ( <SmallLogo /> ),
-          headerLeft:
-        <IconButton
-          icon={navigation.state.isDrawerOpen ? 'close' : 'menu'}
-          size={25}
-          color={'black'}
-          onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />,
-        // headerLeft: <Text onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>Menu</Text>,
+        headerTitle: <SmallLogo />,
+        headerLeft: (
+          <IconButton
+            icon={navigation.state.isDrawerOpen ? 'close' : 'menu'}
+            size={25}
+            color={'black'}
+            onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+          />
+        ),
       }
     },
   }
