@@ -1,33 +1,69 @@
 import React, { Component } from 'react'
-import { createStackNavigator } from 'react-navigation'
+import { createDrawerNavigator, createStackNavigator, DrawerActions } from 'react-navigation'
 import NavigationService from 'App/Services/NavigationService'
-import { StatusBar, View } from 'react-native'
+import { Dimensions, StatusBar, View } from 'react-native'
 import styles from './RootScreenStyle'
-import SplashScreen from 'App/Containers/SplashScreen/SplashScreen'
 import { connect } from 'react-redux'
 import StartupActions from 'App/Stores/Startup/Actions'
 import SettingsActions from 'App/Stores/Settings/Actions'
-import DrawerScreen from './DrawerScreen'
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
+import { DefaultTheme, IconButton, Provider as PaperProvider } from 'react-native-paper'
 import { GetSettingsSelector } from 'App/Stores/Settings/Selectors'
 import PostModal from 'App/Components/PostModal/PostModal'
 import Colors from 'App/Theme/Colors'
 import VersionNumber from 'react-native-version-number'
+import PostsScreen from 'App/Containers/Posts/PostsScreen'
+import AboutUs from 'App/Containers/AboutUs/AboutUs'
+import ContactScreen from 'App/Containers/Contact/ContactScreen'
+import FeedbackScreen from 'App/Containers/Feedback/FeedbackScreen'
+import DrawerMenu from 'App/Components/DrawerMenu/DrawerMenu'
+import Fonts from 'App/Theme/Fonts'
+import SmallLogo from 'App/Components/SmallLogo/SmallLogo'
 
-/**
- * The root screen contains the application's navigation.
- *
- * @see https://reactnavigation.org/docs/en/hello-react-navigation.html#creating-a-stack-navigator
- */
-const AppNav = createStackNavigator(
+let { height, width } = Dimensions.get('window')
+
+const headerSettings = {
+  headerMode: 'float',
+  navigationOptions: ({ navigation }) => {
+    return {
+      headerStyle: { backgroundColor: 'white' },
+      headerTitle: <SmallLogo />,
+      headerLeft: (
+        <IconButton
+          icon={navigation.state.isDrawerOpen ? 'close' : 'menu'}
+          size={25}
+          color={'black'}
+          onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+        />
+      ),
+    }
+  },
+}
+/* Navigation Stacks to have headers */
+const PostsStack = createStackNavigator({ PostsHome: PostsScreen }, { ...headerSettings })
+const AboutStack = createStackNavigator({ AboutHome: AboutUs }, { ...headerSettings })
+const ContactStack = createStackNavigator({ ContactHome: ContactScreen }, { ...headerSettings })
+const FeedbackStack = createStackNavigator({ FeedbackHome: FeedbackScreen }, { ...headerSettings })
+
+const DrawerStack = createDrawerNavigator(
   {
-    SplashScreen: SplashScreen,
-    MainScreen: DrawerScreen, // Navigation to it happens in StartupSaga.js
+    Acasa: PostsStack,
+    'Despre noi': AboutStack,
+    Contact: ContactStack,
+    Feedback: FeedbackStack,
   },
   {
-    initialRouteName: 'SplashScreen',
-    headerMode: 'none',
-    mode: 'card',
+    contentComponent: DrawerMenu,
+    drawerWidth: width,
+    contentOptions: {
+      inactiveTintColor: '#fff',
+      labelStyle: {
+        ...Fonts.family.normal,
+        fontSize: 18,
+        fontWeight: '500',
+        lineHeight: 0,
+        textTransform: 'uppercase',
+      },
+    },
   }
 )
 
@@ -66,9 +102,12 @@ class RootScreen extends Component {
           barStyle={this.props.settings.get('theme') ? 'light-content': 'dark-content'}
         />
         <View style={styles.container}>
-          <AppNav
+          <DrawerStack
             // Initialize the NavigationService (see https://reactnavigation.org/docs/en/navigating-without-navigation-prop.html)
             ref={(navigatorRef) => {
+              // DEV - Force Open Drawer
+              navigatorRef.dispatch(DrawerActions.toggleDrawer())
+              // DEV
               NavigationService.setTopLevelNavigator(navigatorRef)
             }}
           />
