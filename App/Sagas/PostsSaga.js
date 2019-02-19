@@ -52,7 +52,8 @@ export function* fetchMorePosts() {
 
 export function* openPost(payload) {
   const posts = yield select(PostsSavedSelector)
-  const foundPost = PostsMiddleware.getSpecificPost(payload.post.id, posts)
+  console.log('openPost(payload)', payload)
+  const foundPost = PostsMiddleware.getSpecificPost(payload.postId, posts)
   yield put(PostsActions.openPostModal(foundPost))
 }
 

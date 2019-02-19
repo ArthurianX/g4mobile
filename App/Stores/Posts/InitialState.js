@@ -9,6 +9,6 @@ export const INITIAL_STATE = Map({
   postsIsLoading: false,
   apiCallPageSize: 15,
   apiCallPageOffset: 0,
-  openPost: null
+  openPost: null,
   // TODO: How to handle new posts when updating over existing store ?!!?!?
 })

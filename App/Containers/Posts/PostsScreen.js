@@ -6,7 +6,7 @@ import { PropTypes } from 'prop-types'
 import PostsActions from 'App/Stores/Posts/Actions'
 import SettingsAction from 'App/Stores/Settings/Actions'
 import PostsCards from 'App/Components/PostsCards/PostsCards'
-import LoadingActivity from 'App/Components/LoadingActivity/LoadingActivity'
+import { NavigationActions } from 'react-navigation'
 import Style from './PostsScreenStyle'
 
 let posts = []
@@ -30,23 +30,22 @@ const processPosts = (items) => {
   return result
 }
 
-const keyExtractor = (item, index) => {
-  // console.log('keyExtractor', item, index)
-  return item.id
-}
-
-const onViewableItemsChanged = (id) => {
-  // console.log('onViewableItemsChanged', id)
-}
-
 class PostsScreen extends React.Component {
   componentDidMount() {
     this.props.fetchMorePosts()
   }
 
   render() {
-    const onPressItem = (post) => {
-      this.props.openPost(post)
+    const onPressItem = (postId) => {
+      // this.props.navigation.navigate({ routeName: 'SinglePost', params: { post: post } })
+
+      // const navigateToSinglePostAction = NavigationActions.navigate({
+      //   routeName: 'Acasa',
+      //   action: NavigationActions.navigate({ routeName: 'SinglePost', params: { post: post } }),
+      // })
+      // this.props.navigation.dispatch(navigateToSinglePostAction)
+
+      this.props.navigation.navigate('SinglePost', { postId: postId })
     }
     const onRefresh = (id) => {
       this.props.fetchPosts()
@@ -66,7 +65,7 @@ class PostsScreen extends React.Component {
           onEndReachedThreshold={0.8}
           onEndReached={this.props.fetchMorePosts}
           style={{ backgroundColor: this.props.theme.colors.background, paddingTop: 20 }}
-          renderItem={({ item }) => <TouchableOpacity onPress={onPressItem.bind(this, item)}><PostsCards post={item} notificationCallback={this.props.createSnackbar} /></TouchableOpacity>}
+          renderItem={({ item }) => <TouchableOpacity onPress={onPressItem.bind(this, item.id)}><PostsCards post={item} notificationCallback={this.props.createSnackbar} /></TouchableOpacity>}
         />
         {/* <Text style={Style.text}>{this.props.isHot ? "It's pretty hot!" : ''}</Text> */}
         <Text style={Style.text}>{this.props.postsErrorMessage}</Text>
