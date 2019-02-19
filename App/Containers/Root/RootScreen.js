@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { createDrawerNavigator, createStackNavigator, DrawerActions } from 'react-navigation'
 import NavigationService from 'App/Services/NavigationService'
-import { Dimensions, StatusBar, View } from 'react-native'
+import { Dimensions, StatusBar, View, Text } from 'react-native'
 import styles from './RootScreenStyle'
 import { connect } from 'react-redux'
 import StartupActions from 'App/Stores/Startup/Actions'
 import SettingsActions from 'App/Stores/Settings/Actions'
-import { DefaultTheme, IconButton, Provider as PaperProvider } from 'react-native-paper'
+import { DefaultTheme, Button, IconButton, Provider as PaperProvider } from 'react-native-paper'
 import { GetSettingsSelector } from 'App/Stores/Settings/Selectors'
 import PostModal from 'App/Components/PostModal/PostModal'
 import Colors from 'App/Theme/Colors'
@@ -18,6 +18,7 @@ import FeedbackScreen from 'App/Containers/Feedback/FeedbackScreen'
 import DrawerMenu from 'App/Components/DrawerMenu/DrawerMenu'
 import Fonts from 'App/Theme/Fonts'
 import SmallLogo from 'App/Components/SmallLogo/SmallLogo'
+import PostScreen from 'App/Containers/Posts/PostScreen'
 
 let { height, width } = Dimensions.get('window')
 
@@ -31,7 +32,7 @@ const headerSettings = {
         <IconButton
           icon={navigation.state.isDrawerOpen ? 'close' : 'menu'}
           size={25}
-          color={'black'}
+          color={'#15202A'}
           onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
         />
       ),
@@ -39,7 +40,29 @@ const headerSettings = {
   },
 }
 /* Navigation Stacks to have headers */
-const PostsStack = createStackNavigator({ PostsHome: PostsScreen }, { ...headerSettings })
+const PostsStack = createStackNavigator(
+  {
+    PostsHome: PostsScreen,
+    SinglePost: {
+      screen: PostScreen,
+      navigationOptions: ({ navigation }) => {
+        return {
+          headerStyle: { backgroundColor: 'white' },
+          headerTitle: <SmallLogo />,
+          headerLeft: (
+            <IconButton
+              icon="keyboard-backspace"
+              size={25}
+              color={'#15202A'}
+              onPress={() => navigation.goBack()}
+            />
+          ),
+        }
+      },
+    },
+  },
+  { ...headerSettings }
+)
 const AboutStack = createStackNavigator({ AboutHome: AboutUs }, { ...headerSettings })
 const ContactStack = createStackNavigator({ ContactHome: ContactScreen }, { ...headerSettings })
 const FeedbackStack = createStackNavigator({ FeedbackHome: FeedbackScreen }, { ...headerSettings })
@@ -106,13 +129,12 @@ class RootScreen extends Component {
             // Initialize the NavigationService (see https://reactnavigation.org/docs/en/navigating-without-navigation-prop.html)
             ref={(navigatorRef) => {
               // DEV - Force Open Drawer
-              navigatorRef.dispatch(DrawerActions.toggleDrawer())
+              // navigatorRef.dispatch(DrawerActions.toggleDrawer())
               // DEV
               NavigationService.setTopLevelNavigator(navigatorRef)
             }}
           />
         </View>
-        <PostModal />{/*TODO:REPLACE HTHIS*/}
       </PaperProvider>
     )
   }
