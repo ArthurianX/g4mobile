@@ -75,6 +75,9 @@ const DrawerStack = createDrawerNavigator(
     Feedback: FeedbackStack,
   },
   {
+    navigationOptions: () => ({
+      gesturesEnabled: false,
+    }),
     contentComponent: DrawerMenu,
     drawerWidth: width,
     contentOptions: {
