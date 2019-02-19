@@ -24,7 +24,6 @@ export default class App extends Component {
          * for example `loading={<SplashScreen />}`.
          * @see https://github.com/rt2zz/redux-persist/blob/master/docs/PersistGate.md
          */}
-        {/* <SplashScreen /> TODO: Putting Splashscreen here too, will make it render twice. */}
         <PersistGate loading={null} persistor={persistor} onBeforeLift={onBeforeLift}>
           <RootScreen />
         </PersistGate>
