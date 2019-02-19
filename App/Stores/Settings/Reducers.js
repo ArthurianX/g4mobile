@@ -37,6 +37,11 @@ export const clearNotification = (state) =>
     currentNotification: '',
   })
 
+export const setAppVersion = (state, { appVersion }) =>
+  state.merge({
+    appVersion: appVersion,
+  })
+
 export const reducer = createReducer(INITIAL_STATE, {
   [SettingsTypes.CHANGE_THEME]: settingsChangeTheme,
   [SettingsTypes.CHANGE_CATEGORY_VISIBILITY]: settingsCategoryVisibility,
@@ -45,4 +50,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [SettingsTypes.CHANGE_NOTIFICATION_STATUS]: settingsNotificationStatus,
   [SettingsTypes.SET_NOTIFICATION]: setNotification,
   [SettingsTypes.CLEAR_NOTIFICATION]: clearNotification,
+  [SettingsTypes.SET_APP_VERSION]: setAppVersion,
 })

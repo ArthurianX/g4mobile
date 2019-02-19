@@ -141,6 +141,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-version-number')
     compile project(':lottie-react-native')
     compile project(':react-native-snackbar')
     compile project(':react-native-webview')

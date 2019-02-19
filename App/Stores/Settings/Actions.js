@@ -10,6 +10,8 @@ const { Types, Creators } = createActions({
   pushNotification: ['message'],
   setNotification: ['currentNotification'],
   clearNotification: null,
+  checkAppVersion: ['version'],
+  setAppVersion: ['appVersion'],
 })
 
 export const SettingsTypes = Types
