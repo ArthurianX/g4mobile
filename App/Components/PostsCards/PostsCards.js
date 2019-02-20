@@ -7,6 +7,7 @@ import Styles from './PostsCardsStyles'
 import { CleanMarkupService } from 'App/Services/CleanMarkupService'
 import Snackbar from 'react-native-snackbar'
 import { LoggingService } from '../../Services/SentryLoggingService'
+import { SharingService } from '../../Services/SharingService'
 
 let shareIcon = {}
 let externalIcon = {}
@@ -14,41 +15,6 @@ let externalIcon = {}
 const showSnack = (message) => {
   Snackbar.show({
     title: message,
-  })
-}
-
-const shareArticle = async (post) => {
-  const content = {
-    url: post.link,
-    message: CleanMarkupService.getPlain(post.excerpt),
-    title: post.title,
-    dialogTitle: post.title,
-    subject: post.title,
-  }
-
-  try {
-    const result = await Share.share(content)
-
-    if (result.action === Share.sharedAction) {
-      if (result.activityType) {
-        // shared with activity type of result.activityType
-        showSnack('Articol distribuit')
-      } else {
-        // shared
-        showSnack('Articol distribuit')
-      }
-    } else if (result.action === Share.dismissedAction) {
-      showSnack('Articolul nu a fost distribuit')
-    }
-  } catch (error) {
-    LoggingService.log('Share Activity Fail', 'SHARE', error)
-  }
-}
-
-const openArticle = (link) => {
-  Linking.openURL(link).catch((err) => {
-    console.error('An error occurred', err)
-    LoggingService.log('Open in Browser Fail', 'SHARE', err)
   })
 }
 
@@ -79,14 +45,14 @@ class PostsCards extends React.Component {
             icon={shareIcon}
             color={'#7f7f7f'}
             size={35}
-            onPress={() => shareArticle(this.props.post, this.props.notificationCallback)}
+            onPress={() => SharingService.share(this.props.post)}
           />
           <IconButton
             icon={externalIcon}
             color={'#7f7f7f'}
             size={35}
             style={{ marginBottom: 1 }}
-            onPress={() => openArticle(this.props.post.link)}
+            onPress={() => SharingService.open(this.props.post.link)}
           />
         </Card.Actions>
       </Card>

@@ -32,7 +32,7 @@ const processPosts = (items) => {
 
 class PostsScreen extends React.Component {
   componentDidMount() {
-    this.props.fetchMorePosts()
+    // this.props.fetchMorePosts()
   }
 
   render() {

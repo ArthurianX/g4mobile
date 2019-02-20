@@ -1,15 +1,18 @@
 import React from 'react'
 import { Surface, Text, Title } from 'react-native-paper'
 import Fonts from 'App/Theme/Fonts'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
+import { SharingService } from '../../Services/SharingService'
 
 class DonateBanner extends React.Component {
   render() {
     return (
-      <Surface style={Styles.donateSurface}>
-        <Title style={Styles.donateTitle}>Doneaza pentru presa pe care o sustii</Title>
-        <Text style={Styles.donateText}>G4Media este un non-profit si depinde de tine</Text>
-      </Surface>
+      <TouchableOpacity onPress={() => SharingService.open('https://www.g4media.ro/doneaza')}>
+        <Surface style={Styles.donateSurface}>
+          <Title style={Styles.donateTitle}>Doneaza pentru presa pe care o sustii</Title>
+          <Text style={Styles.donateText}>G4Media este un non-profit si depinde de tine</Text>
+        </Surface>
+      </TouchableOpacity>
     )
   }
 }

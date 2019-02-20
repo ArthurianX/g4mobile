@@ -17,35 +17,40 @@ const generateStyle = (theme) => {
           font-weight: 500;                          
         }                  
         a {
-            font-size: 3rem;
+            font-size: 1.2rem;
             color: ${theme.colors.accent} !important;
         }      
         .g4postimagemobile {
           width: 100%;
           height: auto;
-          margin-top: 2rem;
-          margin-bottom: 1rem;
+          margin-top: 1rem;
+          margin-bottom: 0.5rem;
         }
         body {
-          width:100%;
+          width: 100%;
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        body > h1 {
+            margin-top: 1rem;
         }
         h1 {
-          font-size: 48px;
+          font-size: 1.4rem;
           font-weight: bold;
           margin-left: 4%; 
           margin-right: 4%;
         }
         h2 {
-          font-size: 40px;
+          font-size: 1.2rem;
           font-weight: bold;
         }
         p, div {
-          font-size: 3rem;
+          font-size: 1.2rem;
           margin-left: 4%; 
           margin-right: 4%; 
         }
         h3 {
-          font-size: 32px;
+          font-size: 1rem;
           font-weight: bold;
         }
         img {

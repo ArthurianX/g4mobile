@@ -9,7 +9,10 @@ import { PostsMiddleware } from 'App/Services/PostsMiddlewareService'
 export function* fetchPosts() {
   // Dispatch a redux action using `put()`
   // @see https://redux-saga.js.org/docs/basics/DispatchingActions.html
-  yield put(PostsActions.fetchPostsLoading())
+
+  // Loading is Stopped for top posts fetch - two loading indicators ...
+  // yield put(PostsActions.fetchPostsLoading())
+
   // Reset offset
   yield put(PostsActions.resetOffset())
 
