@@ -17,7 +17,11 @@ const headerSettings = {
   headerMode: 'float',
   navigationOptions: ({ navigation }) => {
     return {
-      headerStyle: { backgroundColor: 'white' },
+      headerStyle: {
+        backgroundColor: 'white',
+        // borderBottomWidth: 0,
+        // shadowColor: 'transparent',
+      },
       headerTitle: (<SmallLogo />),
       headerLeft: (
         <IconButton

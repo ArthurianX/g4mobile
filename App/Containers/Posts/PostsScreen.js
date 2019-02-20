@@ -6,7 +6,7 @@ import { PropTypes } from 'prop-types'
 import PostsActions from 'App/Stores/Posts/Actions'
 import SettingsAction from 'App/Stores/Settings/Actions'
 import PostsCards from 'App/Components/PostsCards/PostsCards'
-import { NavigationActions } from 'react-navigation'
+import FullCard from 'App/Components/FullCard/FullCard'
 import Style from './PostsScreenStyle'
 
 let posts = []
@@ -65,10 +65,14 @@ class PostsScreen extends React.Component {
           onEndReachedThreshold={0.8}
           onEndReached={this.props.fetchMorePosts}
           style={{ backgroundColor: this.props.theme.colors.background, paddingTop: 20 }}
-          renderItem={({ item }) => <TouchableOpacity onPress={onPressItem.bind(this, item.id)}><PostsCards post={item} notificationCallback={this.props.createSnackbar} /></TouchableOpacity>}
+          renderItem={({ item, index }) => {
+            if (index === 0) {
+              return (<TouchableOpacity onPress={onPressItem.bind(this, item.id)}><FullCard post={item} /></TouchableOpacity>)
+            } else {
+              return (<TouchableOpacity onPress={onPressItem.bind(this, item.id)}><PostsCards post={item} /></TouchableOpacity>)
+            }
+          }}
         />
-        {/* <Text style={Style.text}>{this.props.isHot ? "It's pretty hot!" : ''}</Text> */}
-        <Text style={Style.text}>{this.props.postsErrorMessage}</Text>
       </View>
     )
   }

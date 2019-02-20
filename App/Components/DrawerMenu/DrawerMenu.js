@@ -1,13 +1,11 @@
 import React from 'react'
-import { IconButton, Surface, Text, Title, withTheme } from 'react-native-paper'
-import { Dimensions, ScrollView, StatusBar, View } from 'react-native'
+import { IconButton, withTheme } from 'react-native-paper'
+import { ScrollView, StatusBar, View } from 'react-native'
 import { SafeAreaView, DrawerActions } from 'react-navigation'
 import Styles from './DrawerMenuStyles'
 import SmallLogo from 'App/Components/SmallLogo/SmallLogo'
 import DrawerNavigatorItems from './DrawerNavigatorItems'
 import DonateBanner from 'App/Components/DonateBanner/DonateBanner'
-
-let { height, width } = Dimensions.get('window')
 
 class DrawerMenu extends React.Component {
   constructor(props) {
