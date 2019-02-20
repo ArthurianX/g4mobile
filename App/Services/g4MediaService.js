@@ -1,5 +1,6 @@
 import { create } from 'apisauce'
 import { Config } from 'App/Config'
+import { LoggingService } from './SentryLoggingService'
 
 const g4MediaApiClient = create({
   /**
@@ -61,10 +62,11 @@ function getAllPosts(undefined, params) {
   return g4MediaApiClient.get('posts', params).then((response) => {
     if (response.ok) {
       // console.info('g4MediaApiClient response OK', response.data)
-      return processResponse(response.data, 'post')
+      // return processResponse(response.data, 'post')
+      return LoggingService.wrap(processResponse(response.data, 'post'), 'warning', 'object')
     }
 
-    console.info('g4MediaApiClient response FAIL', response)
+    LoggingService.log('G4Media Fetch Posts Fail', 'API', response)
     return null
   })
 }

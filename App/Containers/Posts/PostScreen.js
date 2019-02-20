@@ -10,6 +10,7 @@ import PostsActions from '../../Stores/Posts/Actions'
 import Icon from 'react-native-vector-icons/EvilIcons'
 import { CleanMarkupService } from '../../Services/CleanMarkupService'
 import Snackbar from 'react-native-snackbar'
+import { LoggingService } from '../../Services/SentryLoggingService'
 
 let currentPost = {}
 const sharePost = (
@@ -28,7 +29,13 @@ const populateCurrentPost = (post) => {
   currentPost.excerpt = post.get('excerpt')
 }
 
-const shareArticle = (post) => {
+const showSnack = (message) => {
+  Snackbar.show({
+    title: message,
+  })
+}
+
+const shareArticle = async (post) => {
   const content = {
     url: post.link,
     message: CleanMarkupService.getPlain(post.excerpt),
@@ -37,25 +44,23 @@ const shareArticle = (post) => {
     subject: post.title,
   }
 
-  const failureCallback = (param) => {
-    console.log('failureCallback', param)
-  }
-  const successCallback = (param) => {
-    console.log('successCallback', param)
-  }
+  try {
+    const result = await Share.share(content)
 
-  console.log('Share Content', content)
-  Share.share(content).then((param) => {
-    // Use this to dispatch a Redux / Saga to send a notification
-    // cbck(param.action)
-
-    // OR use this to just create a snackbar
-    if (param.action !== 'dismissedAction') {
-      Snackbar.show({
-        title: 'Articol distribuit',
-      })
+    if (result.action === Share.sharedAction) {
+      if (result.activityType) {
+        // shared with activity type of result.activityType
+        showSnack('Articol distribuit')
+      } else {
+        // shared
+        showSnack('Articol distribuit')
+      }
+    } else if (result.action === Share.dismissedAction) {
+      showSnack('Articolul nu a fost distribuit')
     }
-  })
+  } catch (error) {
+    LoggingService.log('Share Activity Fail', 'SHARE', error)
+  }
 }
 
 const getContent = (post, theme) => {
@@ -77,6 +82,7 @@ class PostScreen extends React.Component {
   render() {
     return (
       <View style={[Style.container, { backgroundColor: this.props.theme.colors.background }]}>
+        { console.log('this.props.postthis.props.postthis.props.post', this.props.post) }
         { this.props.post ? populateCurrentPost(this.props.post) : <View />}
         <WebView
           style={{ backgroundColor: this.props.theme.colors.background}}

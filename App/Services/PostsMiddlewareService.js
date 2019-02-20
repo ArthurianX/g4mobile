@@ -3,10 +3,11 @@ import sortBy from 'lodash-es/sortBy'
 import uniqBy from 'lodash-es/uniqBy'
 import findIndex from 'lodash-es/findIndex'
 import { difference } from 'lodash-es'
+import { LoggingService } from './SentryLoggingService'
 
 function loggingExtractIds(arr, context) {
   let res = ''
-  arr.map((ele) => res += ele.id + ' >> ')
+  arr.map((ele) => (res += ele.id + ' >> '))
   console.log(context, ':  ', res)
 }
 
@@ -36,14 +37,17 @@ function sortById(arr) {
 }
 
 function sortByTime(arr) {
-  return sortBy(arr, (ele) => (new Date(ele.date).getTime() / 1000 | 0)).reverse()
+  return sortBy(arr, (ele) => (new Date(ele.date).getTime() / 1000) | 0).reverse()
 }
 
 /* Merge Posts as the user loads them, limit is 500 */
 function mergePosts(present, incoming) {
   const actual = convertPresent(present)
 
-  let collection = incoming && incoming.length ? removeDuplicates(actual.concat(incoming)) : removeDuplicates(actual)
+  let collection =
+    incoming && incoming.length
+      ? removeDuplicates(actual.concat(incoming))
+      : removeDuplicates(actual)
   // loggingExtractIds(collection, 'Right after merge')
   collection = sortById(collection)
   // loggingExtractIds(collection, 'Should be Sorted by ID')
@@ -54,7 +58,7 @@ function mergePosts(present, incoming) {
   // console.log('present: ', present)
   // console.log('incoming: ', incoming)
   // console.log('OUTPUT: ', limitNumber(collection.reverse(), 30))
-  
+
   return collection
 }
 
@@ -62,7 +66,10 @@ function mergePosts(present, incoming) {
 function mergePostsWithStartupTrim(present, incoming) {
   const actual = convertPresent(present)
 
-  let collection = incoming && incoming.length ? removeDuplicates(actual.concat(incoming)) : removeDuplicates(actual)
+  let collection =
+    incoming && incoming.length
+      ? removeDuplicates(actual.concat(incoming))
+      : removeDuplicates(actual)
   collection = sortByTime(collection)
   collection = limitNumber(collection, 30)
 
@@ -70,7 +77,7 @@ function mergePostsWithStartupTrim(present, incoming) {
   // console.log('present: ', present)
   // console.log('incoming: ', incoming)
   // console.log('OUTPUT: ', limitNumber(collection.reverse(), 30))
-  
+
   return collection
 }
 
@@ -91,9 +98,13 @@ function getNewCount(existing, actual) {
 }
 
 export const PostsMiddleware = {
-  mergePosts,
-  mergePostsWithStartupTrim,
-  getSpecificPost,
+  mergePosts: LoggingService.wrap(mergePosts, 'warning', 'object').bind(this),
+  mergePostsWithStartupTrim: LoggingService.wrap(
+    mergePostsWithStartupTrim,
+    'warning',
+    'object'
+  ).bind(this),
+  getSpecificPost: LoggingService.wrap(getSpecificPost, 'warning', 'object').bind(this),
   mergeAndFilter,
-  getNewCount,
+  getNewCount: LoggingService.wrap(getNewCount, 'warning', 'object').bind(this),
 }

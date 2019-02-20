@@ -4,6 +4,7 @@ import { persistReducer, persistStore } from 'redux-persist'
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 import immutableTransform from 'redux-persist-transform-immutable'
 import { AsyncStorage, Platform } from 'react-native'
+import { LoggingService } from '../Services/SentryLoggingService'
 
 /**
  * This import defaults to localStorage for web and AsyncStorage for react-native.
@@ -37,7 +38,24 @@ export default (rootReducer, rootSaga) => {
   const sagaMiddleware = createSagaMiddleware()
   middleware.push(sagaMiddleware)
 
-  enhancers.push(applyMiddleware(...middleware))
+  const logger = store => next => action => {
+    let result = next(action)
+    LoggingService.recordActions({ action: action, store: store.getState() })
+    return result
+  }
+
+  const crashReporter = store => next => action => {
+    try {
+      return next(action)
+    } catch (err) {
+      console.error('CreateStore - Caught an exception!', err)
+      throw err
+    }
+  }
+
+
+
+  enhancers.push(applyMiddleware(...middleware, logger, crashReporter))
 
   // Redux persist
   const persistedReducer = persistReducer(persistConfig, rootReducer)

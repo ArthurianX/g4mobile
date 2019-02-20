@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
+import { Platform } from 'react-native'
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import createStore from 'App/Stores'
 import RootScreen from './Containers/Root/RootScreen'
+import { Sentry } from 'react-native-sentry'
+Sentry.config('https://889ce4faeb354cdb9e451842d463db3e@sentry.io/1397851').install()
 
 const { store, persistor } = createStore()
 
-const onBeforeLift = () => {
-    // setTimeout(() => {}, 5000);
-}
+const onBeforeLift = () => {}
 
 export default class App extends Component {
   render() {
