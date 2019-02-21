@@ -71,7 +71,7 @@ Assuming you have all the requirements installed, you can setup and run the proj
 
 - `yarn install` to install the dependencies
 - create your [configuration file `App/Config/index.js`](App/Config) from `index.dev.js` (in you are in dev environment) and fill the missing values
-- install [React Native Debugger]('https://github.com/jhen0409/react-native-debugger')(download one of the releases) and start the application
+- install [React Native Debugger](https://github.com/jhen0409/react-native-debugger)(download one of the releases) and start the application
 - `react-native run-android` to run the Android application (remember to start a simulator or connect an Android phone)
 - `react-native run-ios` to run the iOS application (remember to start a simulator or connect an iPhone phone)
 - iOS specific: once the Simulator has started and the app has thrown a big red error, hit `CMD+D` (with the simulator window selected) and selected Debug JS, then `CMD+R` to restart the application
