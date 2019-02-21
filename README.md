@@ -47,7 +47,7 @@ The boilerplate includes an example (displaying the current weather temperature)
 - [`App/Components`](App/Components): presentational components
 - [`App/Config`](App/Config): configuration of the application
 - [`App/Containers`](App/Containers): container components, i.e. the application's screens
-- [`App/Images`](App/Assets/Images): images used by the application
+- [`App/Assets`](App/Assets): assets used in the application, images, animations and fonts
 - [`App/Sagas`](App/Sagas): redux sagas
 - [`App/Services`](App/Services): application services, e.g. API clients
 - [`App/Stores`](App/Stores): redux [actions, reducers and stores](https://redux.js.org/basics)
@@ -71,8 +71,11 @@ Assuming you have all the requirements installed, you can setup and run the proj
 
 - `yarn install` to install the dependencies
 - create your [configuration file `App/Config/index.js`](App/Config) from `index.dev.js` (in you are in dev environment) and fill the missing values
+- install [React Native Debugger]('https://github.com/jhen0409/react-native-debugger')(download one of the releases) and start the application
 - `react-native run-android` to run the Android application (remember to start a simulator or connect an Android phone)
 - `react-native run-ios` to run the iOS application (remember to start a simulator or connect an iPhone phone)
+- iOS specific: once the Simulator has started and the app has thrown a big red error, hit `CMD+D` (with the simulator window selected) and selected Debug JS, then `CMD+R` to restart the application
+
 
 ## Useful documentation
 
