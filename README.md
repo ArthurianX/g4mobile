@@ -76,6 +76,15 @@ Assuming you have all the requirements installed, you can setup and run the proj
 - `react-native run-ios` to run the iOS application (remember to start a simulator or connect an iPhone phone)
 - iOS specific: once the Simulator has started and the app has thrown a big red error, hit `CMD+D` (with the simulator window selected) and selected Debug JS, then `CMD+R` to restart the application
 
+## Gotchas
+
+- android debugging is shoddy at best
+- the bundler often gets stuck, unstuck it with `watchman watch-del-all && rm -rf /tmp/metro-bundler-cache-* && npm start -- --reset-cache`
+- iOS: When using Inspector (Toggle Inspector from Simulator) when selecting an element in the app you can see the selected element in React Native Debugger
+- the red error screens usually will load a sourceMap and point you in the right file where the error occured, that is most of the times
+- sometimes everything is so wrong that you have to manually delete the build folders and start a clean build (`/ios/build` and `/android/build`) followed by a bundler clean start as well
+- when linking new React Native libraries, it might fail or it might not be enough, make sure to also try the manual route
+- React Native Debugger can also get stuck (after long usage, it hogs up a lot of memory), the Simulator will move incredibly slow and the bundler won't detect changes properly, make sure to restart everything.
 
 ## Useful documentation
 
