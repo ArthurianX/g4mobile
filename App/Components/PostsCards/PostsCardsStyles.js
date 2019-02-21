@@ -3,11 +3,15 @@ import Fonts from 'App/Theme/Fonts'
 
 export default StyleSheet.create({
   card: {
-    marginBottom: 14,
+    marginBottom: 24,
     marginLeft: 12,
     marginRight: 12,
     paddingLeft: 0,
     paddingRight: 0,
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    borderBottomColor: '#D8D8D8',
+    shadowColor: 'transparent',
   },
   cardContent: {
     paddingLeft: 0,

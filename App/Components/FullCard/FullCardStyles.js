@@ -20,6 +20,9 @@ export default StyleSheet.create({
     paddingLeft: 12,
     paddingRight: 12,
     color: '#fff',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 2
   },
   actions: {
     height: 60,

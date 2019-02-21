@@ -64,7 +64,7 @@ class PostsScreen extends React.Component {
           refreshing={this.props.postsIsLoading}
           onEndReachedThreshold={0.8}
           onEndReached={this.props.fetchMorePosts}
-          style={{ backgroundColor: this.props.theme.colors.background, paddingTop: 20 }}
+          style={{ backgroundColor: this.props.theme.colors.background, paddingTop: 0 }}
           renderItem={({ item, index }) => {
             if (index === 0) {
               return (<TouchableOpacity onPress={onPressItem.bind(this, item.id)}><FullCard post={item} /></TouchableOpacity>)

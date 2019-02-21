@@ -36,13 +36,14 @@ class FullCard extends React.Component {
             icon={shareIcon}
             color={'#fff'}
             size={35}
+            style={{ marginTop: 6 }}
             onPress={() => SharingService.share(this.props.post)}
           />
           <IconButton
             icon={externalIcon}
             color={'#fff'}
             size={35}
-            style={{ marginBottom: 1 }}
+            style={{ marginBottom: 0 }}
             onPress={() => SharingService.open(this.props.post.link)}
           />
         </View>
