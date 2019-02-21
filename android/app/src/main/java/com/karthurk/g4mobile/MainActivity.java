@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "G4 Media Mobile";
+        return "G4Mobile";
     }
 }
