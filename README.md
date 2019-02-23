@@ -12,6 +12,7 @@ The driving goal of the architecture of the boilerplate is separation of concern
     
     If you are interested you can [read more about it here](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0).
 
+
 - **State is managed using global [Redux](https://redux.js.org/) stores**.
 
     When applications grow, sharing state and its changes can become very hard. Questions like "How can I access this data?" or "When did this change?" are common, just like passing data around components just to be able to use it in nested components.
